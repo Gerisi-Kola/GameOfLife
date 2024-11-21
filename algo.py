@@ -1,4 +1,10 @@
 """
+attention : 
+- un case entourer de celule vivante est egale a 8
+- la valeur maximale est egale a 18
+
+
+
 Je pense partir sur une grille avec des valeur
 0 : vide / par defaut
 +10 : vivant
@@ -14,27 +20,27 @@ cell_edge = [[0,0,0,0],
             [0,0,0,0],
             [0,0,0,0],
             [0,0,0,0]]
-"""[[0,0,0,0,0],
-            [0,0,0,0,0],
-            [0,0,0,0,0],
-            [0,0,0,0,0],
-            [0,0,0,0,0]]"""
 
-space =    [[0,0,0,0],
-            [0,10,10,0],
-            [0,0,10,0],
+
+space =    [[10,10,10,0],
+            [10,10,10,0],
+            [10,10,10,0],
             [0,0,0,0]]
-"""[[0,0,0],
-            [0,10,0],
-            [0,10,0]]"""
+"""[[0,0,0,0],
+            [0,10,10,0],
+            [10,10,10,0],
+            [0,0,0,0]]"""
+
 
 def scan_space():
+    """Repere les celule vivante et les inscrits dans une liste"""
     for i in range(len(space)):
         for j in range(len(space[i])):
             if space[i][j] >= 10:
                 #print(i,j)
                 cell_in_life.append([i,j])
     print(f"cell_in_life = {cell_in_life}")
+
 
 def cell_edge_calcul():
     for item in cell_in_life:
@@ -48,7 +54,7 @@ def cell_edge_calcul():
         #on verifie la position des ranger pour de pas sortir de l'index
         if i > 0:
             i_range = (i-1,i+2)
-        elif i <= len(cell_in_life):
+        elif i < len(cell_in_life): # < ou <= ??
             i_range = (i+1,i+2)
         else:
             i_range = (i-1,i+1)
@@ -56,18 +62,29 @@ def cell_edge_calcul():
         # on fait le calcul des valeurs voisine
         for it in range(i_range[0],i_range[1]):
             print(f"i_range = {i_range} ,i = {i}, j = {j}")
-            cell_edge[it][j-1] += 1
+            if j-1 != -1:
+                cell_edge[it][j-1] += 1
             cell_edge[it][j] += 1
             try:
                 cell_edge[it][j+1] += 1
             except:
                 pass
     
-    print(f"cell_edge = {cell_edge}")
+    print("\ncell_edge")
+    for i in range(len(cell_edge)):
+        print(cell_edge[i])
+    print("")
 
 
 
-#print(cell_in_life)
+def born_and_die():
+    for i in range(len(cell_edge)):
+        for j in range(len(cell_edge)):
+            if 2 <= cell_edge[i][j] <= 14:
+                cell_edge[i][j] = 0
+            elif 3 <= cell_edge[i][j] < 10 :
+                pass
+
 
 if __name__ == "__main__":
     scan_space()
