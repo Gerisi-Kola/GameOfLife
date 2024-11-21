@@ -13,10 +13,11 @@
 ### Jounal
 - ***20-11*** : Claude m'a pendu 4 GUI fait avec tkinter / kivy / Qt / pygame. Je vais d'abord me pencher sur l'algo.
 - J'ai une fonction qui trouve les cellule vivantes et une qui calcule les voisines et met les points des positions en memoires
-- ***21-11*** : La fonction qui calcul les voisinages crash si il y a une cellule à la dernière ligne. (Problème 1)
+- ***21-11*** : La fonction qui calcul les voisinages crash si il y a une cellule à la dernière ligne. (Problème 1). J'ai changer le code pour être en POO. J'ai fait une méthode pour agrandir "l'aréne" mais il y a un problème (2)
 
 
 ### Problèmes
-1. La fonction qui calcul les voisinages crash si il y a une cellule à la dernière ligne. Le probleme devrait être reglé si je met en place une verification des position et augmenter la taille des
+1. La Méthode qui calcul les voisinages crash à du mal à gérer les cellules des bors, de tous les coté.
+2. Aprés la 2 extention du territoire, il y a un bug et des cellule meur. à fixer
 
 
