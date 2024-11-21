@@ -13,5 +13,10 @@
 ### Jounal
 - ***20-11*** : Claude m'a pendu 4 GUI fait avec tkinter / kivy / Qt / pygame. Je vais d'abord me pencher sur l'algo.
 - J'ai une fonction qui trouve les cellule vivantes et une qui calcule les voisines et met les points des positions en memoires
+- ***21-11*** : La fonction qui calcul les voisinages crash si il y a une cellule à la dernière ligne. (Problème 1)
+
+
+### Problèmes
+1. La fonction qui calcul les voisinages crash si il y a une cellule à la dernière ligne. Le probleme devrait être reglé si je met en place une verification des position et augmenter la taille des
 
 
