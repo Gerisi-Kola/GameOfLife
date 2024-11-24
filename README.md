@@ -14,7 +14,7 @@
 - ***20-11*** : Claude m'a pendu 4 GUI fait avec tkinter / kivy / Qt / pygame. Je vais d'abord me pencher sur l'algo.
 - J'ai une fonction qui trouve les cellule vivantes et une qui calcule les voisines et met les points des positions en memoires
 - ***21-11*** : La fonction qui calcul les voisinages crash si il y a une cellule à la dernière ligne. (Problème N1). J'ai changer le code pour être en POO. J'ai fait une méthode pour agrandir "l'aréne" mais il y a un problème (F1)
-- 
+- ***24-11*** : J'ai créé une version json du fichier des constates et j'ai aussi créé un scripte pour les récupérer
 
 ### Problèmes
 #### Not fix
