@@ -54,7 +54,7 @@ class GameOfLife:
         self.v_scrollbar.config(command=self.canvas.yview)
         self.h_scrollbar.config(command=self.canvas.xview)
         self.canvas.config(xscrollcommand=self.h_scrollbar.set,
-                         yscrollcommand=self.v_scrollbar.set)
+                        yscrollcommand=self.v_scrollbar.set)
         
         # Frame pour les contrôles
         self.control_frame = ttk.Frame(root)
@@ -107,8 +107,8 @@ class GameOfLife:
                 
                 color = 'black' if self.grid[y][x] else 'white'
                 self.canvas.create_rectangle(x1, y1, x2, y2, 
-                                          fill=color, 
-                                          outline='gray')
+                                        fill=color, 
+                                        outline='gray')
         
         self.canvas.configure(scrollregion=self.canvas.bbox('all'))
     

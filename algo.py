@@ -53,8 +53,6 @@ class AlgoGameOfLife():
                 if self.cell_edge[i][j] >= 10:
                     #print(i,j)
                     self.cell_in_life.append([i,j])
-        #print(f"scan = {self.cell_in_life}")
-        #print(f"self.cell_in_life = {self.cell_in_life}")
     
     def cell_edge_calcul(self):
         """Calcul les voisinages"""
