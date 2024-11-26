@@ -23,7 +23,7 @@ root = tk.Tk()
 root.title("Grille Paramétrable")
 
 # Variables pour stocker la taille de la grille
-grid_size = 5
+grid_size = 5 #tk.IntVar(value=5)
 
 # Figure Matplotlib initiale
 fig, ax = create_grid(grid_size)
@@ -53,15 +53,25 @@ def update_grid():
     # Redessiner la toile
     canvas.draw()
 
-def expand_grid():
+def grid_plus():
+    global grid_size
     grid_size += 2
+    print(grid_size)
+    update_grid()
+
+def grid_moins():
+    global grid_size
+    if grid_size < 2:
+        grid_size -= 2
+    print(grid_size)
     update_grid()
 
 # Boutons pour ajuster la taille
 tk.Label(root, text="Taille de la grille :").pack()
 """tk.Scale(root, from_=1, to=20, orient=tk.HORIZONTAL, 
         variable=grid_size, command=lambda x: update_grid()).pack()"""
-tk.Button(root, text = "expand", command = expand_grid)
+tk.Button(root, text = "++", command = grid_plus).pack()
+tk.Button(root, text = "--", command = grid_moins).pack()
 
 # Bouton de fermeture
 tk.Button(root, text="Fermer", command=root.quit).pack()
