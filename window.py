@@ -1,3 +1,6 @@
+"""
+L'interface est à l'envers, le point (0,0) est en bas à gauche alors que pour l'algo c'est en haut à gauche
+"""
 import matplotlib.pyplot as plt
 import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -25,12 +28,18 @@ class WindowGameOfLife():
         self.button_frame = tk.Frame(self.root)
         self.button_frame.pack(side = 'bottom')
         # Créer et placer le bouton AVANT le canvas
+        self.previous_button = tk.Button(self.button_frame, text="Previous", command=self.previous_stage)
+        self.previous_button.pack(side = "right")
+        
         self.algo = AlgoGameOfLife(self.grid_size, self.mise_a_jour_progression, self.print_text)
         self.start_button = tk.Button(self.button_frame, text="Start", command=self.algo.generation_manager)
         self.start_button.pack(side = "left")
         
         self.save_button = tk.Button(self.button_frame, text="Save", command=self.save_stage)
         self.save_button.pack(side = "right")
+        
+        self.clear_button = tk.Button(self.button_frame, text="Clear", command=lambda x=True: self.clear_screen(x))
+        self.clear_button.pack(side = "right")
         
         # Créer le canvas APRÈS le bouton
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.root)
@@ -63,7 +72,7 @@ class WindowGameOfLife():
         self.canvas.draw()                   # Rafraîchit l'affichage pour montrer les modifications
     
     
-    def toggle_cell(self, x, y):
+    def toggle_cell_screen(self, x, y):
         """Passe la case de <<vivante>> à <<morte>>"""
         # Coordonnées pour identifier la case
         cell_id = (x, y)
@@ -77,10 +86,25 @@ class WindowGameOfLife():
         rect = plt.Rectangle((x, y), 1, 1, fill=True, facecolor=color, edgecolor='black')
         self.ax.add_patch(rect)
         self.canvas.draw()
+    
+    
+    def clear_screen(self, restart=False):
+        print(f"clear {self.actual_stage}")
+        for i in self.actual_stage:
+            self.toggle_cell_screen(i[0],i[1])
         
-        if self.print_text:
-            # Afficher les coordonnées dans la console
-            print(f"Case cliquée: ({x}, {y})")
+        self.actual_stage = []
+        
+        if restart:
+            self.algo.cell_in_life = []
+    
+    
+    def write_on_screen(self):
+        """On affiche les cellules vivante"""
+        for i in self.actual_stage:
+            self.toggle_cell_screen(i[0],i[1])
+    
+    
     
     
     def on_click(self, event):
@@ -89,34 +113,70 @@ class WindowGameOfLife():
             x = int(event.xdata)
             y = int(event.ydata)
             if 0 <= x < self.grid_size and 0 <= y < self.grid_size:
-                self.toggle_cell(x, y)
-                self.algo.cell_in_life.append([x,y])
+                if self.print_text:
+                    # Afficher les coordonnées dans la console
+                    print(f"Case cliquée: ({x}, {y})")
+                self.toggle_cell_screen(x, y)
+                self.toggle_cell_life(x,y)
+    
     
     def _update_gui(self,new_cell,old_cell):
         """Recupere l'ancienne et la nouvelle generation et met à jour l'interface
         """
-        for i in old_cell:
-            self.toggle_cell(i[0],i[1])
-        for i in new_cell:
-            self.toggle_cell(i[0],i[1])
+        
+        #on supprime les ancienne celulles
+        self.clear_screen()
         
         self.actual_stage = new_cell
-        self.history.append(old_cell)
-        if len(self.history) > 34:
-            del self.history[-1]
+        
+        self.write_on_screen()
+        
+        try:
+            if old_cell != self.history[0]:
+                self.history.append(old_cell.copy())
+        except:
+            self.history.append(old_cell.copy())
+        if len(self.history) > 3:
+            print(self.history)
+            del self.history[0]
         
         if self.print_text:
             print(f"\n{new_cell}\n")
             print(old_cell)
     
     
-    def mise_a_jour_progression(self, progression, resultat_final=None):
+    def toggle_cell_life(self,x,y):
+        """Modifie les cellules vivantes/mortes à chaque clic"""
+        if [x,y] not in self.algo.cell_in_life:
+            self.algo.cell_in_life.append([x,y])
+        else:
+            self.algo.cell_in_life.remove([x,y])
+        
+        self.actual_stage = self.algo.cell_in_life.copy()
+        #print(self.algo.cell_in_life)
+    
+    
+    def mise_a_jour_progression(self, new_cell, old_cell=None):
         """Cette fonction sera appelée par ll'algo"""
         # On utilise after pour être thread-safe
-        self.root.after(0, self._update_gui, progression, resultat_final)
+        self.root.after(0, self._update_gui, new_cell, old_cell)
+    
     
     def save_stage(self):
         print(self.actual_stage)
+    
+    
+    def previous_stage(self):
+        """Reviens en arrière sur l'historique"""
+        #print("")
+        #print(self.history)
+        if self.history != [] and self.history != [[]]:
+            self.clear_screen(restart = True)
+            self.actual_stage = self.history.pop(-1)
+            self.write_on_screen()
+        else:
+            print(self.history)
+    
 
 
 

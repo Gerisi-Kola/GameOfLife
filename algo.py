@@ -167,7 +167,7 @@ class AlgoGameOfLife():
             self.born_and_die() # defini les celules vivantes et mortes
             self.check_rim() # verifie si il y a des celules qui s'approche du bore
             
-            self.callback(self.cell_in_life,self.old_stage) # ca renvoie la grille au fichier parent
+            self.callback(self.cell_in_life.copy(),self.old_stage.copy()) # ca renvoie la grille au fichier parent
             if self.print_text:
                 print(" ------ new gen ---------")
 
@@ -175,6 +175,6 @@ class AlgoGameOfLife():
 
 if __name__ == "__main__":
     def none_fonction():
-        pass
+        print("a")
     g = AlgoGameOfLife(callback=none_fonction())
     g.generation_manager(5)

@@ -24,14 +24,19 @@
 - ***26-11*** : J'ai fais quelques test sur les GUI matplotlib (J'ai oublié lque j'avais déjà un script pour window alors je l'ai refait)
 
 - ***27-11*** : J'ai refait **l'agrandissement de la grille**, au lieu d'agrandir la liste j'en créé une nouvelle a chaque extention en utilisant **numpy**. Et j'ai **supprimer les GUI exemple** (kivy, pygame,...)
-- J'ai fait un fichier json pour sauvegarder les paternes
+- J'ai fait un fichier json pour sauvegarder les paternes.
+- J'ai **connecter l'inteface** et l'algo. Je peux choisir la configuration à partir du GUI !!!!
+- J'ai 3 boutons qui gére la simulation :  Suivant ; Précédant ; Clear
+- (L'interface est l'algo n'ont pas la même indexiation : N2)(Bug sur la gauche de l'ecran : F2)
 
 
 ### Problèmes
 #### Not fix
 1. La Méthode qui calcul les voisinages crash à du mal à gérer les cellules des bors, de tous les coté.
+2. L'indexiation de l'interface sont inversé. Pour l'interface (0,0) et en bas à gauche alors que pour l'algo c'est en haut à gauche
 
 #### Fix
 1. Aprés la 2 extention du territoire, il y a un bug et des cellules meur. à fixer (27-11 : Le probleme est résolu. Au lieu d'agrandir la liste j'en créé une nouvelle a chaque extention en utilisant numpy)
+2. Les cellules bug si elle sont trop proche de la gauche de l'écran.
 
 
