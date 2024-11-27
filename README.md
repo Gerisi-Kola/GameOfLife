@@ -24,6 +24,7 @@
 - ***26-11*** : J'ai fais quelques test sur les GUI matplotlib (J'ai oublié lque j'avais déjà un script pour window alors je l'ai refait)
 
 - ***27-11*** : J'ai refait **l'agrandissement de la grille**, au lieu d'agrandir la liste j'en créé une nouvelle a chaque extention en utilisant **numpy**. Et j'ai **supprimer les GUI exemple** (kivy, pygame,...)
+- J'ai fait un fichier json avec pour sauvegarder les paternes
 
 
 ### Problèmes
