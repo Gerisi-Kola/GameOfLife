@@ -9,8 +9,8 @@ class GridApp:
         
         # Configuration initiale
         self.grid_size = 5
-        self.fig = plt.figure(figsize=(6, 6))
-        self.ax = self.fig.add_subplot(111)
+        self.fig = plt.figure(figsize=(6, 6))  # Crée une figure carrée de 6x6 pouces
+        self.ax = self.fig.add_subplot(111) # Crée une zone de tracé unique (1x1 grid, position 1)
         
         # Dictionnaire pour suivre l'état des cases (True = noir, False = blanc)
         self.cell_states = {}
@@ -24,22 +24,28 @@ class GridApp:
         
         # Dessiner la grille initiale
         self.draw_grid()
-
+    
     def draw_grid(self):
         self.ax.clear()
         for i in range(self.grid_size):
             for j in range(self.grid_size):
                 rect = plt.Rectangle((j, i), 1, 1, fill=False, edgecolor='black')
-                self.ax.add_patch(rect)
+            # (j, i) : position du coin inférieur gauche du rectangle
+            # 1, 1   : largeur et hauteur du rectangle
+            # fill=False : rectangle non rempli
+            # edgecolor='black' : bordure noire
+            
+                self.ax.add_patch(rect)  # Ajoute le rectangle à la zone de tracé
         
-        self.ax.set_xlim(0, self.grid_size)
-        self.ax.set_ylim(0, self.grid_size)
-        self.ax.set_aspect('equal')
-        self.ax.set_xticks([])
-        self.ax.set_yticks([])
-        self.canvas.draw()
-
+        self.ax.set_xlim(0, self.grid_size)  # Définit les limites de l'axe X
+        self.ax.set_ylim(0, self.grid_size)  # Définit les limites de l'axe Y
+        self.ax.set_aspect('equal')          # Force un ratio 1:1 pour avoir des carrés parfaits
+        self.ax.set_xticks([])               # Supprime les graduations sur l'axe X
+        self.ax.set_yticks([])               # Supprime les graduations sur l'axe Y
+        self.canvas.draw()                   # Rafraîchit l'affichage pour montrer les modifications
+    
     def toggle_cell(self, x, y):
+        """Passe la case de <<vivante>> à <<morte>>"""
         # Coordonnées pour identifier la case
         cell_id = (x, y)
         
@@ -55,8 +61,9 @@ class GridApp:
         
         # Afficher les coordonnées dans la console
         print(f"Case cliquée: ({x}, {y})")
-
+    
     def on_click(self, event):
+        """Recupere la position du clic et daclanche une action"""
         if event.inaxes == self.ax:
             x = int(event.xdata)
             y = int(event.ydata)

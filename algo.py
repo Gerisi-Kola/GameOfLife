@@ -16,18 +16,22 @@ né : 3 !!!
 import numpy as np
 
 class AlgoGameOfLife():
-    def __init__(self):
+    def __init__(self,gride_size=9, callback=None, print_text=True):
+        self.callback = callback
         
-        self.gride_size = 9
+        self.print_text = print_text # ca permet de bloquer tous les <<print>> d'une traite
         
-        self.cell_in_life = [[2,2],[2,3],[3,2],[3,3],[4,4],[4,5],[5,4],[5,5]]
+        self.gride_size = gride_size
+        self.cell_in_life = []
+        self.old_stage = []
         self.cell_edge = np.zeros((self.gride_size, self.gride_size), dtype=int) 
         self.plus_plus()
         
-        print("\norigin")
-        for i in range(len(self.cell_edge)):
-            print(self.cell_edge[i])
-        print("")
+        if self.print_text:
+            print("\norigin")
+            for i in range(len(self.cell_edge)):
+                print(self.cell_edge[i])
+            print("")
         
     
     
@@ -58,16 +62,17 @@ class AlgoGameOfLife():
                     except:
                         print("exhec")
                         pass
-        
-        print("\ncell_edge")
-        for i in range(len(self.cell_edge)):
-            print(self.cell_edge[i])
-        print("")
+        if self.print_text:
+            print("\ncell_edge")
+            for i in range(len(self.cell_edge)):
+                print(self.cell_edge[i])
+            print("")
     
     
     
     def born_and_die(self):
         """Procéde aux naissances et aux morts"""
+        self.old_stage = self.cell_in_life.copy()
         self.cell_in_life = []
         for i in range(len(self.cell_edge)):
             for j in range(len(self.cell_edge)):
@@ -76,19 +81,19 @@ class AlgoGameOfLife():
                                 4 <= self.cell_edge[i][j] <= 11 or\
                                 14 <= self.cell_edge[i][j]:
                                 #10 <= self.cell_edge[i][j] <= 11 or\
-
+                    
                     self.cell_edge[i][j] = 0
                 
                 # Survie/naissance (3 /12 / 13)
                 elif 3 == self.cell_edge[i][j] or 12 <= self.cell_edge[i][j] <=13:
                     self.cell_edge[i][j] = 10
                     self.cell_in_life.append([i,j])
-        
-        print(self.cell_in_life)
-        print("\nborn and die")
-        for i in range(len(self.cell_edge)):
-            print(self.cell_edge[i])
-        print(f"{len(self.cell_edge)}x{len(self.cell_edge[0])}")
+        if self.print_text:
+            print(self.cell_in_life)
+            print("\nborn and die")
+            for i in range(len(self.cell_edge)):
+                print(self.cell_edge[i])
+            print(f"{len(self.cell_edge)}x{len(self.cell_edge[0])}")
     
     
     
@@ -138,11 +143,12 @@ class AlgoGameOfLife():
         self.cell_in_life_correction()
         self.plus_plus()
         
-        print("\nadd")
-        for i in range(len(self.cell_edge)):
-            print(self.cell_edge[i])
-        print(f"{len(self.cell_edge)}x{len(self.cell_edge[0])}")
-        print("")
+        if self.print_text:
+            print("\nadd")
+            for i in range(len(self.cell_edge)):
+                print(self.cell_edge[i])
+            print(f"{len(self.cell_edge)}x{len(self.cell_edge[0])}")
+            print("")
     
     
     
@@ -155,15 +161,20 @@ class AlgoGameOfLife():
     def generation_manager(self, num_of_gen=1):
         #self.scan_space()
         for _ in range(num_of_gen):
-            
+            self.plus_plus()
             #print(self.cell_in_life)
             self.cell_edge_calcul() # calcul le voisinage
             self.born_and_die() # defini les celules vivantes et mortes
-            self.check_rim() # verifie si il y a des celules qui s'aself.cell_edgeroche du bore
-            print(" ------ new gen ---------")
+            self.check_rim() # verifie si il y a des celules qui s'approche du bore
+            
+            self.callback(self.cell_in_life,self.old_stage) # ca renvoie la grille au fichier parent
+            if self.print_text:
+                print(" ------ new gen ---------")
 
 
 
 if __name__ == "__main__":
-    g = AlgoGameOfLife()
+    def none_fonction():
+        pass
+    g = AlgoGameOfLife(callback=none_fonction())
     g.generation_manager(5)
