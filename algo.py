@@ -22,7 +22,8 @@ class AlgoGameOfLife():
         self.print_text = print_text # ca permet de bloquer tous les <<print>> d'une traite
         
         self.gride_size = gride_size
-        self.cell_in_life = []
+        self.number_of_grid_expand = 0
+        self.cell_in_life = []#[2,2],[2,3],[3,2],[3,3]]
         self.old_stage = []
         self.cell_edge = np.zeros((self.gride_size, self.gride_size), dtype=int) 
         self.plus_plus()
@@ -127,7 +128,7 @@ class AlgoGameOfLife():
         # on copie la liste pour pouvoir la modifier dans la boucle
         cell_in_life_copy = self.cell_in_life.copy()
         for i in range(len(self.cell_in_life)):
-                #cell_in_life_copy[i][0] += 1
+                cell_in_life_copy[i][0] += 1
                 cell_in_life_copy[i][1] += 1
         self.cell_in_life = cell_in_life_copy
     
@@ -138,6 +139,7 @@ class AlgoGameOfLife():
             + Ajoute une ligne à gauche et à droite """
         
         self.gride_size += 1
+        self.number_of_grid_expand += 1
         
         self.cell_edge = np.zeros((self.gride_size, self.gride_size), dtype=int) 
         self.cell_in_life_correction()
@@ -157,6 +159,18 @@ class AlgoGameOfLife():
             self.cell_edge[i[0]][i[1]] = 10
     
     
+    def list_adapte_to_grid(self):
+        cell = self.cell_in_life.copy()
+        for i in range(len(self.cell_in_life)):
+            cell[i][0] += self.number_of_grid_expand
+            #cell[i][1] += 2
+        old_cell = self.old_stage.copy()
+        for i in range(len(self.old_stage)):
+            old_cell[i][0] += self.number_of_grid_expand
+            #old_cell[i][1] += 2
+        
+        print(f"new cell = {self.cell_in_life} and adapt = {cell} \nold_cell = {self.old_stage} and adapt = {old_cell}")
+    
     
     def generation_manager(self, num_of_gen=1):
         #self.scan_space()
@@ -166,8 +180,11 @@ class AlgoGameOfLife():
             self.cell_edge_calcul() # calcul le voisinage
             self.born_and_die() # defini les celules vivantes et mortes
             self.check_rim() # verifie si il y a des celules qui s'approche du bore
-            
-            self.callback(self.cell_in_life.copy(),self.old_stage.copy()) # ca renvoie la grille au fichier parent
+            #self.list_adapte_to_grid()
+            try:
+                self.callback(self.cell_in_life.copy(),self.old_stage.copy()) # ca renvoie la grille au fichier parent
+            except:
+                pass
             if self.print_text:
                 print(" ------ new gen ---------")
 

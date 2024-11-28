@@ -17,7 +17,7 @@ class WindowGameOfLife():
         self.actual_stage = []
         
         # Configuration initiale
-        self.grid_size = 9
+        self.grid_size = 15
         self.fig = plt.figure(figsize=(6, 6))  # Crée une figure carrée de 6x6 pouces
         self.ax = self.fig.add_subplot(111) # Crée une zone de tracé unique (1x1 grid, position 1)
         
@@ -32,7 +32,7 @@ class WindowGameOfLife():
         self.previous_button.pack(side = "right")
         
         self.algo = AlgoGameOfLife(self.grid_size, self.mise_a_jour_progression, self.print_text)
-        self.start_button = tk.Button(self.button_frame, text="Start", command=self.algo.generation_manager)
+        self.start_button = tk.Button(self.button_frame, text="Start", command=self.next_gen)
         self.start_button.pack(side = "left")
         
         self.save_button = tk.Button(self.button_frame, text="Save", command=self.save_stage)
@@ -89,7 +89,8 @@ class WindowGameOfLife():
     
     
     def clear_screen(self, restart=False):
-        print(f"clear {self.actual_stage}")
+        if self.print_text:
+            print(f"clear {self.actual_stage}")
         for i in self.actual_stage:
             self.toggle_cell_screen(i[0],i[1])
         
@@ -132,11 +133,12 @@ class WindowGameOfLife():
         self.write_on_screen()
         
         try:
-            if old_cell != self.history[0]:
+            if old_cell != new_cell:
                 self.history.append(old_cell.copy())
         except:
             self.history.append(old_cell.copy())
-        if len(self.history) > 3:
+        if len(self.history) > 64:
+            print("History full")
             print(self.history)
             del self.history[0]
         
@@ -147,6 +149,7 @@ class WindowGameOfLife():
     
     def toggle_cell_life(self,x,y):
         """Modifie les cellules vivantes/mortes à chaque clic"""
+        
         if [x,y] not in self.algo.cell_in_life:
             self.algo.cell_in_life.append([x,y])
         else:
@@ -170,14 +173,24 @@ class WindowGameOfLife():
         """Reviens en arrière sur l'historique"""
         #print("")
         #print(self.history)
-        if self.history != [] and self.history != [[]]:
+        #(f" 0 = {self.history[0]}  /  -1 = {self.history[-1]}")
+        #if self.history != [] and self.history != [[]]:
+        try:
             self.clear_screen(restart = True)
             self.actual_stage = self.history.pop(-1)
+            print(self.actual_stage)
+            self.algo.cell_in_life = self.actual_stage.copy()
             self.write_on_screen()
-        else:
-            print(self.history)
+        except IndexError:
+            print("History empty")
+        #else:
+        #    print(self.history)
     
-
+    def next_gen(self):
+        for i in range (1):
+            self.root.after(0,self.algo.generation_manager())
+            print(i)
+        print("finidh")
 
 
 

@@ -7,8 +7,11 @@
 ## Idées
 - Pour que la grille **soit zoomable** on peut faire en sorte qu'entre chaque generation il y ai un controle si une verification de si on a appuiyer sur un bouton pour dezoomer.
     Si on a appuiyer on met les generation en pose le temps d'ajouter des cases au tableau.
+
 - Pour que les **calcul reste correcte** on peut par exemple cree 5 case au debut et ajouter +5 a tout les position pour les garder inchanger.
+
 - Pour **otimiser les calcul**, au lieu de parcourir une liste casi vide gigantesque. On pourrais garder en memoire toutes les positions des cellule vivante leurs voisines.
+
 - Pour que l'utilisateur ne puisse **pas** mettre des **cellules aux bores**, on peut faire que la grille visuel (GUI) soit plus petites que la grille réel.
 
 ### Jounal
@@ -29,6 +32,8 @@
 - J'ai 3 boutons qui gére la simulation :  Suivant ; Précédant ; Clear
 - (L'interface est l'algo n'ont pas la même indexiation : N2)(Bug sur la gauche de l'ecran : F2)
 
+- ***28-11*** : Ça rame à mort !!! Il faudrait utiliser ***numpy*** car il est +- 100 fois plus rapide car ***codé en C***. J'ai trouver un exemple du Jeu de la Vie (S1)
+
 
 ### Problèmes
 #### Not fix
@@ -40,3 +45,5 @@
 2. Les cellules bug si elle sont trop proche de la gauche de l'écran.
 
 
+### Source
+1. https://www.geeksforgeeks.org/conways-game-life-python-implementation/
