@@ -15,7 +15,6 @@ class WindowGameOfLife():
         self.print_text = print_text
         self.history = []
         self.actual_stage = []
-        self.edgecolor = 'black'
         
         # Configuration initiale
         self.grid_size = 15

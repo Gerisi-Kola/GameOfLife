@@ -15,7 +15,6 @@ class WindowGameOfLife():
         self.print_text = print_text
         self.history = []
         self.actual_stage = []
-        self.edgecolor = 'black'
         
         # Configuration initiale
         self.grid_size = 15
@@ -57,7 +56,7 @@ class WindowGameOfLife():
         self.ax.clear()
         for i in range(self.grid_size):
             for j in range(self.grid_size):
-                rect = plt.Rectangle((j, i), 1, 1, fill=False, edgecolor=self.edgecolor)
+                rect = plt.Rectangle((j, i), 1, 1, fill=False, edgecolor='red')
                 # (j, i) : position du coin inférieur gauche du rectangle
                 # 1, 1   : largeur et hauteur du rectangle
                 # fill=False : rectangle non rempli
@@ -85,10 +84,8 @@ class WindowGameOfLife():
         # Dessiner le rectangle avec la nouvelle couleur
         color = 'black' if is_black else 'white'
         if color == 'white':
-            self.edgecolor = 'black'
-        else:
-            self.edgecolor = 'white'
-        rect = plt.Rectangle((x, y), 1, 1, fill=True, facecolor=color, edgecolor=self.edgecolor)
+            
+        rect = plt.Rectangle((x, y), 1, 1, fill=True, facecolor=color, edgecolor='black')
         self.ax.add_patch(rect)
         self.canvas.draw()
     
