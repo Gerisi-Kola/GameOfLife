@@ -23,17 +23,19 @@ class AlgoGameOfLife():
         
         self.gride_size = gride_size
         self.number_of_grid_expand = 0
-        self.cell_in_life = []#[2,2],[2,3],[3,2],[3,3]]
+        self.cell_in_life = np.array([[2,2],[2,3],[3,2],[3,3]])
         self.old_stage = []
         self.cell_edge = np.zeros((self.gride_size, self.gride_size), dtype=int) 
         self.plus_plus()
+        
+        
         
         if self.print_text:
             print("\norigin")
             for i in range(len(self.cell_edge)):
                 print(self.cell_edge[i])
             print("")
-        
+    
     
     
     
@@ -63,6 +65,9 @@ class AlgoGameOfLife():
                     except:
                         print("exhec")
                         pass
+        
+        
+        
         if self.print_text:
             print("\ncell_edge")
             for i in range(len(self.cell_edge)):
@@ -74,9 +79,9 @@ class AlgoGameOfLife():
     def born_and_die(self):
         """Procéde aux naissances et aux morts"""
         self.old_stage = self.cell_in_life.copy()
-        self.cell_in_life = []
-        for i in range(len(self.cell_edge)):
-            for j in range(len(self.cell_edge)):
+        self.cell_in_life = np.array([])
+        for i in range(self.cell_edge.shape[0]):
+            for j in range(self.cell_edge.shape[0]):
                 # Sur/sous population = mort (1 à 2 / 4 à 11 / +14)
                 if  self.cell_edge[i][j] <= 2 or\
                                 4 <= self.cell_edge[i][j] <= 11 or\
@@ -88,7 +93,8 @@ class AlgoGameOfLife():
                 # Survie/naissance (3 /12 / 13)
                 elif 3 == self.cell_edge[i][j] or 12 <= self.cell_edge[i][j] <=13:
                     self.cell_edge[i][j] = 10
-                    self.cell_in_life.append([i,j])
+                    self.cell_in_life = np.append(self.cell_in_life,[i,j],axis=0)
+        
         if self.print_text:
             print(self.cell_in_life)
             print("\nborn and die")
@@ -107,17 +113,15 @@ class AlgoGameOfLife():
         rim = False
         
         
-        for i in range(0,len(self.cell_in_life)):
-            for j in range(0,len(self.cell_in_life[0])):
+        """for i in range(0,self.cell_in_life.shape[0]):
+            for j in range(0,self.cell_in_life.shape[0]):
                 if self.cell_in_life[i][j] == raw_down or\
                             self.cell_in_life[i][j] == raw_top or\
                             self.cell_in_life[i][j] == col_left or\
                             self.cell_in_life[i][j] == col_right:
                     rim = True
         if rim:
-            self.protection_from_rim()
-            #self.cell_in_life_correction()
-                    #pass
+            self.protection_from_rim()"""
     
     
     
@@ -126,11 +130,14 @@ class AlgoGameOfLife():
             <<l'arrene>> ne pose pas probleme"""
         
         # on copie la liste pour pouvoir la modifier dans la boucle
-        cell_in_life_copy = self.cell_in_life.copy()
+        print(self.cell_in_life, "\n")
+        self.cell_in_life += 1
+        print(self.cell_in_life)
+        """cell_in_life_copy = self.cell_in_life.copy()
         for i in range(len(self.cell_in_life)):
                 cell_in_life_copy[i][0] += 1
                 cell_in_life_copy[i][1] += 1
-        self.cell_in_life = cell_in_life_copy
+        self.cell_in_life = cell_in_life_copy"""
     
     
     
@@ -195,3 +202,5 @@ if __name__ == "__main__":
         print("a")
     g = AlgoGameOfLife(callback=none_fonction())
     g.generation_manager(5)
+    print(type(g.cell_in_life))
+    g.cell_in_life_correction()

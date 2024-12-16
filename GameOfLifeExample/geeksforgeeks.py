@@ -9,7 +9,7 @@ import matplotlib.animation as animation
 # setting up the values for the grid 
 ON = 255
 OFF = 0
-vals = [ON, OFF] 
+vals = [ON, OFF]
 
 def randomGrid(N): 
 
