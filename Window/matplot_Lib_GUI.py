@@ -28,10 +28,6 @@ class GameOfLifePLT:
         
         # Connecter l'événement de clic
         self.fig.canvas.mpl_connect('button_press_event', self.on_click)
-        
-        
-        
-        #plt.show()
     
     
     def on_click(self, event):
@@ -49,6 +45,15 @@ class GameOfLifePLT:
                 self.fig.canvas.draw_idle()  # Rafraîchir l'affichage
     
     
+    def reset_grid(self):
+        # Parcourir toutes les cases et les réinitialiser à la couleur blanche
+        for square in self.squares.values():
+            square.set_facecolor('white')
+        
+        # Rafraîchir l'affichage pour appliquer les changements
+        self.fig.canvas.draw_idle()
+    
+    
     def tkinter_integration(self, root):
         canvas = FigureCanvasTkAgg(self.fig, master=root)
         canvas.get_tk_widget().pack(fill='both', expand=True)
@@ -58,4 +63,4 @@ class GameOfLifePLT:
 
 if __name__ == "__main__":
     g = GameOfLifePLT()
-    
+    plt.show()
