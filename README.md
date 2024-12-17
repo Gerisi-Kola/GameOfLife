@@ -1,7 +1,7 @@
 # Game Of Life
 
 ## Projet de fin de 6e (2024-2025)
-20/11/2024 : Le prof nous a dit de choisir un truc a faire et j'ai choisi le jeu de la vie. Le prof connaissait pas, il a beaucoup aimée le principe
+***20/11/2024*** : Le prof nous a dit de choisir un truc a faire et j'ai choisi le jeu de la vie. Le prof connaissait pas, il a beaucoup aimée le principe
 
 
 ## Idées
@@ -34,7 +34,9 @@
 
 - ***28-11*** : Ça rame à mort !!! Il faudrait utiliser ***numpy*** car il est +- 100 fois plus rapide car ***codé en C***. J'ai trouver un exemple du Jeu de la Vie (S1)
 
-- ***16-12*** : J'ai crée une nouvelle branche (Devlop). J'essaye de refaire le code en utilisant numpy et en utilisant des animations matplotlib. Peut être que je devrait plutôt utiliser PyGame ?
+- ***16-12*** : J'ai crée une **nouvelle branche (Devlop).** J'essaye de refaire le code en utilisant numpy et en utilisant des animations matplotlib. Peut être que je devrait plutôt utiliser PyGame ?
+
+- ***17-12*** : J'ai séparé en 2 le script du GUI. D'un coté Matplotlib et de l'autre Tkinter.
 
 
 ### Problèmes
