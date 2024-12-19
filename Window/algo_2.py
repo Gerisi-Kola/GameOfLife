@@ -22,15 +22,15 @@ class AlgoGameOfLife():
         self.print_text = print_text
         
         self.grid_size = grid_size
-        self.cell_in_life = np.array([[2,2],[3,2],[3,3]])
+        self.cell_in_life = np.array([[2,2],[3,3],[4,2],[4,3]])#[[[3,2],[3,3]])#,[3,4]])
         #self.old_stage = []
         self.cell_edge = np.zeros((self.grid_size, self.grid_size), dtype=int)
         print(f"{self.cell_edge}\n")
-    
-        """for i in self.cell_in_life:
+        
+        for i in self.cell_in_life:
             self.cell_edge[i[0],i[1]] = 10
         
-        print(f"{self.cell_edge}\n")"""
+        print(f"{self.cell_edge}\n")
     
     
     
@@ -63,18 +63,32 @@ class AlgoGameOfLife():
         for i,j in self.cell_in_life:
             #print(i,j)
             self.cell_edge[i-1:i+2,j-1:j+2] += 1
+            #self.cell_edge[i,j] += 1
+            
+            #print(i-1,j-1)
+            print(i,j)
+            #print(i+2,j+2)
+            print()
+            
         
-        #print(self.cell_edge)
+        print(self.cell_edge)
     
     
     def born_and_die(self):
         """Procéde aux naissances et aux morts"""
-        print(" born_and_die \n",self.cell_edge)
+        
         
         x,y = np.where(   (self.cell_edge == 3)
-                        | (self.cell_edge ==12)
-                        | (self.cell_edge ==13))
+                        | (self.cell_edge == 12)
+                        | (self.cell_edge == 13))
         
+        #on met toutes les valeur à 0
+        self.cell_edge * 0
+        # on met à 10 toutes les cellules vivantes
+        self.cell_edge[x,y] = 10
+        
+        
+        print(" born_and_die \n",self.cell_edge)
         print(x,y)
     
     def generation_manager(self, num_of_gen=1):
@@ -85,13 +99,11 @@ class AlgoGameOfLife():
             self.cell_edge_calcul() # calcul le voisinage
             self.born_and_die() # defini les celules vivantes et mortes
             self.check_rim() # verifie si il y a des celules qui s'approche du bore
-            #self.list_adapte_to_grid()
-            """try:
-                self.callback(self.cell_in_life.copy(),self.old_stage.copy()) # ca renvoie la grille au fichier parent
-            except:
-                pass"""
+            
             if self.print_text:
                 print(" ------ new gen ---------")
+            
+            return 
     
 if __name__ == "__main__":
     g = AlgoGameOfLife()

@@ -36,7 +36,9 @@
 
 - ***16-12*** : J'ai crée une **nouvelle branche (Devlop).** J'essaye de refaire le code en utilisant numpy et en utilisant des animations matplotlib. Peut être que je devrait plutôt utiliser PyGame ?
 
-- ***17-12*** : J'ai séparé en 2 le script du GUI. D'un coté Matplotlib et de l'autre Tkinter.
+- ***17-12*** : J'ai séparé en 2 le script du GUI. D'un coté Matplotlib et de l'autre Tkinter. L'interface change au clic et le bouton "clear" nettoyé l'interface.
+
+- ***19-12*** : J'ai fais un fichier Jupyter avec des test pour crée un script pour l'historique. J'ai aussi pensé à faire un autre script pour les musiques et sons.
 
 
 ### Problèmes

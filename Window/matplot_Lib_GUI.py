@@ -10,7 +10,7 @@ class GameOfLifePLT:
         self.ax = self.fig.add_axes([0.1, 0.1, 0.8, 0.8])
         
         # Taille de la grille
-        self.n = 4
+        self.n = 25
         self.grid_data = np.zeros((self.n, self.n))  # 0 pour blanc, 1 pour noir
         
         # Créer les carrés de la grille
