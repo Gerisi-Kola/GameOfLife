@@ -1,14 +1,19 @@
 import tkinter as tk
 
 from matplot_Lib_GUI import GameOfLifePLT
+from music_gpt import Music
 
 class GameOfLifeTk:
-    def __init__(self):
+    def __init__(self,json_data):
         self.root = tk.Tk()
         self.root.geometry("600x600")
         
+        #pygame.init()
         
-        self.GLPLT = GameOfLifePLT()
+        self.music = Music()
+        self.music.launch_bg_music()
+        
+        self.GLPLT = GameOfLifePLT(json_data)
         self.GLPLT.tkinter_integration(self.root)
         self.algo = None
         
@@ -43,4 +48,6 @@ class GameOfLifeTk:
 
 
 if __name__ == "__main__":
-    g = GameOfLifeTk()
+    from json_controler import get_constant_and_limit
+    json_data = get_constant_and_limit()
+    g = GameOfLifeTk(json_data)

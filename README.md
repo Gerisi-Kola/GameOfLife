@@ -42,7 +42,8 @@
 
 - ***19-12*** : J'ai fais un fichier Jupyter avec des test pour crée un script pour l'historique.
 
-- ***20-12*** : J'ai créé un fichier "history" pour gérer l'historique des generations. 'history' utilise numpy. J'ai connecter tout les scripts au fichier json.
+- ***20-12*** : J'ai créé un fichier "history" pour gérer l'historique des générations. 'history' utilise numpy. J'ai connecter tout les scripts au fichier json.
+- J'ai créé un script pour gérer la musique. PyGame et Tkinter ne font pas bon mélange, donc GPT à modifier le code et a mis du multi-threading.
 
 
 ### Problèmes
