@@ -17,11 +17,11 @@ né : 3 !!!
 import numpy as np
 
 class AlgoGameOfLife():
-    def __init__(self, grid_size=9, print_text=True):
+    def __init__(self, json_data, print_text=True):
         
         self.print_text = print_text
         
-        self.grid_size = grid_size
+        self.grid_size = json_data["grid_size"]
         self.cell_in_life = np.array([[2,2],[3,3],[4,2],[4,3]])#[[[3,2],[3,3]])#,[3,4]])
         #self.old_stage = []
         self.cell_edge = np.zeros((self.grid_size, self.grid_size), dtype=int)
@@ -106,7 +106,9 @@ class AlgoGameOfLife():
             return 
     
 if __name__ == "__main__":
-    g = AlgoGameOfLife()
+    from json_controler import get_constant_and_limit
+    json_data = get_constant_and_limit()
+    g = AlgoGameOfLife(json_data)
     #g.scan_space()
     g.cell_edge_calcul()
     g.born_and_die()

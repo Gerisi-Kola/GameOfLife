@@ -4,27 +4,27 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
 class GameOfLifePLT:
-    def __init__(self):
+    def __init__(self,json_data):
         # Créer la figure
         self.fig = plt.figure()
         self.ax = self.fig.add_axes([0.1, 0.1, 0.8, 0.8])
         
         # Taille de la grille
-        self.n = 25
-        self.grid_data = np.zeros((self.n, self.n))  # 0 pour blanc, 1 pour noir
+        self.grid_size = json_data["grid_size"]
+        self.grid_data = np.zeros((self.grid_size, self.grid_size))  # 0 pour blanc, 1 pour noir
         
         # Créer les carrés de la grille
         self.squares = {}  # Changé en dictionnaire pour accès facile
-        for i in range(self.n):
-            for j in range(self.n):
+        for i in range(self.grid_size):
+            for j in range(self.grid_size):
                 square = plt.Rectangle((i, j), 1, 1, facecolor='white', edgecolor='black')
                 self.ax.add_patch(square)
                 self.squares[(i,j)] = square
         
         # Configurer les axes
         self.ax.set_aspect('equal')
-        self.ax.set_xlim(-0.1, self.n + 0.1)
-        self.ax.set_ylim(-0.1, self.n + 0.1)
+        self.ax.set_xlim(-0.1, self.grid_size + 0.1)
+        self.ax.set_ylim(-0.1, self.grid_size + 0.1)
         
         # Connecter l'événement de clic
         self.fig.canvas.mpl_connect('button_press_event', self.on_click)
@@ -37,7 +37,7 @@ class GameOfLifePLT:
             j = int(event.ydata)
             
             # Vérifier si le clic est dans la grille
-            if 0 <= i < self.n and 0 <= j < self.n:
+            if 0 <= i < self.grid_size and 0 <= j < self.grid_size:
                 square = self.squares[(i,j)]
                 current_color = square.get_facecolor()
                 new_color = 'black' if current_color[0] == 1 else 'white'
@@ -62,5 +62,7 @@ class GameOfLifePLT:
         return self.fig
 
 if __name__ == "__main__":
-    g = GameOfLifePLT()
+    from json_controler import get_constant_and_limit
+    json_data = get_constant_and_limit()
+    g = GameOfLifePLT(json_data)
     plt.show()

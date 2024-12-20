@@ -1,0 +1,9 @@
+{
+    "BORN" : 3,
+    "STASE_DOWN" : 12,
+    "STASE_UP" : 13,
+    
+    "grid_size" : 10,
+    "history_len" : 32
+}
+

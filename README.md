@@ -42,7 +42,7 @@
 
 - ***19-12*** : J'ai fais un fichier Jupyter avec des test pour crée un script pour l'historique.
 
-- ***20-12*** : J'ai créé un fichier "history".
+- ***20-12*** : J'ai créé un fichier "history" pour gérer l'historique des generations. 'history' utilise numpy. J'ai connecter tout les scripts au fichier json.
 
 
 ### Problèmes
