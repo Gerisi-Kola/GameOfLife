@@ -3,18 +3,18 @@ import tkinter as tk
 from matplot_Lib_GUI import GameOfLifePLT
 from music_gpt import Music
 
-class GameOfLifeTk:
+class GameOfLifeTk(GameOfLifePLT):
     def __init__(self,json_data):
         self.root = tk.Tk()
         self.root.geometry("600x600")
         
-        #pygame.init()
+        super().__init__(json_data)
         
         self.music = Music(json_data)
         self.music.launch_bg_music()
         
-        self.GLPLT = GameOfLifePLT(json_data)
-        self.GLPLT.tkinter_integration(self.root)
+        #self.init_plt(json_data)
+        self.tkinter_integration(self.root)
         self.algo = None
         
         
@@ -33,7 +33,7 @@ class GameOfLifeTk:
         self.save_button = tk.Button(self.button_frame, text="Save", command=None)
         self.save_button.pack(side="right")
         
-        self.clear_button = tk.Button(self.button_frame, text="Clear", command=self.clear)#=lambda x=True: self.clear_screen(x))
+        self.clear_button = tk.Button(self.button_frame, text="Clear", command=self.clear)
         self.clear_button.pack(side="right")
         
         
@@ -43,9 +43,9 @@ class GameOfLifeTk:
     
     def clear(self):
         """Reinitialise la grille et le ndarray"""
-        self.GLPLT.reset_grid()
-        
-        
+        self.clear_grid()
+        self.clear_cell()
+    
     
     def start(self):
         import numpy as np
@@ -62,7 +62,7 @@ class GameOfLifeTk:
         n +=10
         n[::2,::2] = 0
         start2 = time.time()
-        self.GLPLT.update_grid_from_array2(n)
+        self.update_grid_from_array2(n)
         end2 = time.time()
         
         print(start1-end1,"      ",start2-end2)

@@ -2,9 +2,11 @@ import matplotlib.pyplot as plt
 #import matplotlib.animation as animation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
+from algo import AlgoGameOfLife
 
-class GameOfLifePLT:
+class GameOfLifePLT(AlgoGameOfLife):
     def __init__(self,json_data):
+        super().__init__(json_data)
         # Créer la figure
         self.fig = plt.figure()
         self.ax = self.fig.add_axes([0.1, 0.1, 0.8, 0.8])
@@ -38,14 +40,19 @@ class GameOfLifePLT:
             
             # Vérifier si le clic est dans la grille
             if 0 <= i < self.grid_size and 0 <= j < self.grid_size:
-                square = self.squares[(i,j)]
-                current_color = square.get_facecolor()
-                new_color = 'black' if current_color[0] == 1 else 'white'
-                square.set_facecolor(new_color)
-                self.fig.canvas.draw_idle()  # Rafraîchir l'affichage
+                self.on_clic_set_game_of_life_algo(i,j)
+                self.on_clic_set_grid(i,j)
     
     
-    def reset_grid(self):
+    def on_clic_set_grid(self,i,j):
+        square = self.squares[(i,j)]
+        current_color = square.get_facecolor()
+        new_color = 'black' if current_color[0] == 1 else 'white'
+        square.set_facecolor(new_color)
+        self.fig.canvas.draw_idle()  # Rafraîchir l'affichage
+    
+    
+    def clear_grid(self):
         # Parcourir toutes les cases et les réinitialiser à la couleur blanche
         for square in self.squares.values():
             square.set_facecolor('white')
@@ -106,6 +113,7 @@ class GameOfLifePLT:
         
         # Rafraîchir l'affichage pour appliquer les changements
         self.fig.canvas.draw_idle()
+
 
 if __name__ == "__main__":
     from json_controler import get_constant_and_limit

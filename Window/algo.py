@@ -22,11 +22,16 @@ class AlgoGameOfLife():
         self.print_text = print_text
         
         self.grid_size = json_data["grid_size"]
-        self.cell_in_life = np.array([[2,2],[3,3],[4,2],[4,3]])#[[[3,2],[3,3]])#,[3,4]])
-        #self.old_stage = []
+        
         self.cell_edge = np.zeros((self.grid_size, self.grid_size), dtype=int)
         print(f"{self.cell_edge}\n")
         
+        #self.reload_life()
+    
+    
+    def reload_life(self):
+        self.cell_in_life = np.array([[2,2],[3,3],[4,2],[4,3]])
+            #self.old_stage = []
         for i in self.cell_in_life:
             self.cell_edge[i[0],i[1]] = 10
         
@@ -47,15 +52,18 @@ class AlgoGameOfLife():
         
         self.cell_in_life = np.append(self.cell_in_life, np.column_stack((x, y)),axis=0)
         print(self.cell_in_life)
-        
-        """self.cell_in_life = np.array([])
-        for i in range(self.cell_edge.shape[0]):
-            for j in range(self.cell_edge.shape[0]):
-                if self.cell_edge[i][j] >= 10:
-                    #print(i,j)
-                    self.cell_in_life.aself.cell_edgeend([i,j])"""
     
     
+    def on_clic_set_game_of_life_algo(self,i,j):
+        print(i,j)
+        j,i = i,j
+        #print(self.cell_edge)
+        #self.cell_edge[i,j] = 10
+        if self.cell_edge[i,j]  == 0:
+            self.cell_edge[i,j] = 10
+        else:
+            self.cell_edge[i,j] = 0
+        print(self.cell_edge)
     
     
     def cell_edge_calcul(self):
@@ -74,42 +82,44 @@ class AlgoGameOfLife():
         print(self.cell_edge)
     
     
+    def clear_cell(self):
+        self.cell_edge *= 0
+    
     def born_and_die(self):
         """Procéde aux naissances et aux morts"""
-        
         
         x,y = np.where(   (self.cell_edge == 3)
                         | (self.cell_edge == 12)
                         | (self.cell_edge == 13))
         
         #on met toutes les valeur à 0
-        self.cell_edge * 0
+        self.cell_edge *= 0
         # on met à 10 toutes les cellules vivantes
         self.cell_edge[x,y] = 10
-        
         
         print(" born_and_die \n",self.cell_edge)
         print(x,y)
     
-    def generation_manager(self, num_of_gen=1):
+    def generation_manager(self):
         #self.scan_space()
-        for _ in range(num_of_gen):
-            self.plus_plus()
-            #print(self.cell_in_life)
-            self.cell_edge_calcul() # calcul le voisinage
-            self.born_and_die() # defini les celules vivantes et mortes
-            self.check_rim() # verifie si il y a des celules qui s'approche du bore
-            
-            if self.print_text:
-                print(" ------ new gen ---------")
-            
-            return 
+        #self.plus_plus()
+        #print(self.cell_in_life)
+        self.cell_edge_calcul() # calcul le voisinage
+        self.born_and_die() # defini les celules vivantes et mortes
+        #self.check_rim() # verifie si il y a des celules qui s'approche du bore
+        
+        if self.print_text:
+            print(" ------ new gen ---------")
+        
+        print(self.cell_edge)
+        return self.cell_edge
     
 if __name__ == "__main__":
     from json_controler import get_constant_and_limit
     json_data = get_constant_and_limit()
     g = AlgoGameOfLife(json_data)
     #g.scan_space()
-    g.cell_edge_calcul()
-    g.born_and_die()
+    """g.cell_edge_calcul()
+    g.born_and_die()"""
+    g.generation_manager()
     #g.generation_manager(5)
