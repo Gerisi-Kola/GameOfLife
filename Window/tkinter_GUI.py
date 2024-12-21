@@ -10,7 +10,7 @@ class GameOfLifeTk:
         
         #pygame.init()
         
-        self.music = Music()
+        self.music = Music(json_data)
         self.music.launch_bg_music()
         
         self.GLPLT = GameOfLifePLT(json_data)
