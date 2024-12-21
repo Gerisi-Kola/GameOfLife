@@ -27,7 +27,7 @@ class GameOfLifeTk:
         self.previous_button = tk.Button(self.button_frame, text="Previous", command=None)
         self.previous_button.pack(side="right")
         
-        self.start_button = tk.Button(self.button_frame, text="Start", command=None)
+        self.start_button = tk.Button(self.button_frame, text="Start", command=self.start)
         self.start_button.pack(side="left")
         
         self.save_button = tk.Button(self.button_frame, text="Save", command=None)
@@ -44,6 +44,28 @@ class GameOfLifeTk:
     def clear(self):
         """Reinitialise la grille et le ndarray"""
         self.GLPLT.reset_grid()
+        
+        
+    
+    def start(self):
+        import numpy as np
+        n = np.zeros((10,10), int)
+        #n[2:5,2:5] = 10
+        #n[0,0] = 
+        n[::2,::2] += 10
+        #print(n)
+        import time
+        start1 = time.time()
+        #self.GLPLT.update_grid_from_array(n)
+        end1 = time.time()
+        time.sleep(0.5)
+        n +=10
+        n[::2,::2] = 0
+        start2 = time.time()
+        self.GLPLT.update_grid_from_array2(n)
+        end2 = time.time()
+        
+        print(start1-end1,"      ",start2-end2)
 
 
 

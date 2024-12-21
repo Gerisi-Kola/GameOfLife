@@ -45,6 +45,7 @@
 - ***20-12*** : J'ai créé un fichier "history" pour gérer l'historique des générations. 'history' utilise numpy. J'ai connecter tout les scripts au fichier json.
 - J'ai créé un script pour gérer la musique. PyGame et Tkinter ne font pas bon mélange, donc GPT à modifier le code et a mis du multi-threading.
 
+- ***21-12*** : GPT m'a pendu 2 méthode pour mettre à jour l'affichage de la grille, l'une est plus optimiser. 
 
 ### Problèmes
 #### Not fix

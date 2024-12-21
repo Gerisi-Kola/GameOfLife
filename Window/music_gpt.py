@@ -6,7 +6,7 @@ class Music:
         self.file = "music"
         self.json_bg = json_data["music"]["bg_music"]
         self.json_sound = json_data["music"]["touch_music"]
-        print(f"json_data = {self.json_bg}")
+        #print(f"json_data = {self.json_bg}")
         self.bg_music = None
     
     def launch_bg_music(self):

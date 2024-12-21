@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+#import matplotlib.animation as animation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
@@ -60,6 +60,52 @@ class GameOfLifePLT:
         canvas.draw()
         
         return self.fig
+    
+    
+    def update_grid_from_array(self, array):
+        """
+        Met à jour la grille en fonction des valeurs dans un tableau numpy.
+        Les valeurs 0 deviennent blanches et les autres valeurs deviennent noires.
+        """
+        if array.shape != (self.grid_size, self.grid_size):
+            raise ValueError("Le tableau d'entrée doit avoir la même taille que la grille.")
+        
+        for i in range(self.grid_size):
+            for j in range(self.grid_size):
+                value = array[i, j]
+                square = self.squares[(i, j)]
+                # Si la valeur est 0, la case est blanche, sinon noire
+                color = 'white' if value == 0 else 'black'
+                square.set_facecolor(color)
+        
+        # Rafraîchir l'affichage pour appliquer les changements
+        self.fig.canvas.draw_idle()
+    
+    
+    def update_grid_from_array2(self, array): # c'est la plus optimiser des 2
+        """
+        Met à jour la grille en fonction des valeurs dans un tableau numpy.
+        Les valeurs 0 deviennent blanches et les autres valeurs deviennent noires.
+        """
+        if array.shape != (self.grid_size, self.grid_size):
+            raise ValueError("Le tableau d'entrée doit avoir la même taille que la grille.")
+        
+        # Utiliser un tableau de couleurs (evite de recalculer la couleur de chaque carré individuellement)
+        color_map = {0: 'white', 10: 'black'}
+        
+        # Créer un tableau avec les couleurs à appliquer (en évitant de changer la couleur trop souvent)
+        for i in range(self.grid_size):
+            for j in range(self.grid_size):
+                color = color_map.get(array[i, j], 'black')  # Default to black if value is not 0 or 10
+                square = self.squares[(i, j)]
+                current_color = square.get_facecolor()[0]
+                
+                # Ne mettre à jour que si la couleur change pour éviter les appels redondants
+                if current_color != (1 if color == 'white' else 0):
+                    square.set_facecolor(color)
+        
+        # Rafraîchir l'affichage pour appliquer les changements
+        self.fig.canvas.draw_idle()
 
 if __name__ == "__main__":
     from json_controler import get_constant_and_limit

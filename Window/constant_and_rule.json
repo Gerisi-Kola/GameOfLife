@@ -10,13 +10,13 @@
         "touch_music" : {
             "source" : "iphone_son_de_touche.ogg",
             "name" : "Son de Touche",
-            "credit" : "¿¿¿"
+            "credit" : "lasonotheque.org"
             },
         "bg_music" : {
             "dreams" : {
                 "source" : "dreams.ogg",
                 "name" : "Dreams",
-                "credit" : "??"
+                "credit" : "Melodigne"
             },
             "calm-my-mind" : {
                 "source" : "please-calm-my-mind.ogg",
