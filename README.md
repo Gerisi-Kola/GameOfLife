@@ -48,6 +48,8 @@
 - ***21-12*** : GPT m'a pendu 2 méthode pour mettre à jour l'affichage de la grille, l'une est plus optimiser.
 - J'ai imbriquer les scripts grace à **l'heritage** et j'ai connecter le clic sur la grille avec l'algo.
 
+- ***22-22*** : Les cellules qui sont en x = 0 ou y = 0 meurs.
+
 ### Problèmes
 #### Not fix
 1. La Méthode qui calcul les voisinages crash à du mal à gérer les cellules des bores, de tous les coté.

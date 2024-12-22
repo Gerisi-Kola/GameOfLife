@@ -11,16 +11,14 @@ class History:
         #self.history = [0,0,0,0,0,0,0,0,0,0]
         #self.history = np.zeros((self.history_len,self.history_len), int)
         self.index = 0
-        self.c = 0
     
-    def history_append(self):
+    def history_append(self, status):
         if self.index == self.history_len:
             self.index = 0
         
-        self.history[self.index] = self.c
+        self.history[self.index] = status
         
         self.index += 1
-        self.c += 1
         
         #print(self.history)
     

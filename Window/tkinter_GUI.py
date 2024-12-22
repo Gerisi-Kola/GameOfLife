@@ -2,6 +2,7 @@ import tkinter as tk
 
 from matplot_Lib_GUI import GameOfLifePLT
 from music_gpt import Music
+from history import History
 
 class GameOfLifeTk(GameOfLifePLT):
     def __init__(self,json_data):
@@ -10,12 +11,7 @@ class GameOfLifeTk(GameOfLifePLT):
         
         super().__init__(json_data)
         
-        self.music = Music(json_data)
-        self.music.launch_bg_music()
-        
-        #self.init_plt(json_data)
         self.tkinter_integration(self.root)
-        self.algo = None
         
         
         
@@ -36,6 +32,10 @@ class GameOfLifeTk(GameOfLifePLT):
         self.clear_button = tk.Button(self.button_frame, text="Clear", command=self.clear)
         self.clear_button.pack(side="right")
         
+        self.history = History(json_data)
+        
+        self.music = Music(json_data)
+        self.music.launch_bg_music()
         
         self.root.mainloop()
     
@@ -48,7 +48,10 @@ class GameOfLifeTk(GameOfLifePLT):
     
     
     def start(self):
-        import numpy as np
+        next = self.generation_manager()
+        self.update_grid_from_array(next)
+        self.history.history_append(next)
+        """import numpy as np
         n = np.zeros((10,10), int)
         #n[2:5,2:5] = 10
         #n[0,0] = 
@@ -65,7 +68,7 @@ class GameOfLifeTk(GameOfLifePLT):
         self.update_grid_from_array2(n)
         end2 = time.time()
         
-        print(start1-end1,"      ",start2-end2)
+        print(start1-end1,"      ",start2-end2)"""
 
 
 

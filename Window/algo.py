@@ -26,11 +26,11 @@ class AlgoGameOfLife():
         self.cell_edge = np.zeros((self.grid_size, self.grid_size), dtype=int)
         print(f"{self.cell_edge}\n")
         
-        #self.reload_life()
+        self.reload_life()
     
     
     def reload_life(self):
-        self.cell_in_life = np.array([[2,2],[3,3],[4,2],[4,3]])
+        self.cell_in_life = np.array([[2,2],[3,3],[4,1],[4,2],[4,3]])
             #self.old_stage = []
         for i in self.cell_in_life:
             self.cell_edge[i[0],i[1]] = 10
@@ -55,10 +55,8 @@ class AlgoGameOfLife():
     
     
     def on_clic_set_game_of_life_algo(self,i,j):
-        print(i,j)
-        j,i = i,j
-        #print(self.cell_edge)
-        #self.cell_edge[i,j] = 10
+        #print(i,j)
+        #j,i = i,j
         if self.cell_edge[i,j]  == 0:
             self.cell_edge[i,j] = 10
         else:
@@ -68,24 +66,37 @@ class AlgoGameOfLife():
     
     def cell_edge_calcul(self):
         """Calcul les voisinages"""
-        for i,j in self.cell_in_life:
+        print(" ------ cell_edge_calcul ---------")
+        print(self.cell_edge)
+        x,y = np.where(self.cell_edge == 10)
+        array_len = self.cell_edge.shape
+        print(array_len)
+        print(np.column_stack((x, y)))
+        for i,j in np.column_stack((x, y)):
             #print(i,j)
-            self.cell_edge[i-1:i+2,j-1:j+2] += 1
+            
+            if i != 0 and j != 0:
+                self.cell_edge[i-1:i+2,j-1:j+2] += 1
+                self.cell_edge[i,j] -= 1
+            else:
+                print("error")
             #self.cell_edge[i,j] += 1
             
             #print(i-1,j-1)
-            print(i,j)
+            #print(i,j)
             #print(i+2,j+2)
-            print()
+            #print()
             
         
-        print(self.cell_edge)
+        #print(self.cell_edge)
     
     
     def clear_cell(self):
         self.cell_edge *= 0
     
     def born_and_die(self):
+        print(" ------ cell_edge_calcul ---------")
+        print(self.cell_edge)
         """Procéde aux naissances et aux morts"""
         
         x,y = np.where(   (self.cell_edge == 3)
@@ -97,8 +108,8 @@ class AlgoGameOfLife():
         # on met à 10 toutes les cellules vivantes
         self.cell_edge[x,y] = 10
         
-        print(" born_and_die \n",self.cell_edge)
-        print(x,y)
+        #print(" born_and_die \n",self.cell_edge)
+        #print(x,y)
     
     def generation_manager(self):
         #self.scan_space()
@@ -121,5 +132,6 @@ if __name__ == "__main__":
     #g.scan_space()
     """g.cell_edge_calcul()
     g.born_and_die()"""
-    g.generation_manager()
+    for i in range(10):
+        g.generation_manager()
     #g.generation_manager(5)
