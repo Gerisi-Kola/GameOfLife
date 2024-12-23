@@ -48,7 +48,9 @@
 - ***21-12*** : GPT m'a pendu 2 méthode pour mettre à jour l'affichage de la grille, l'une est plus optimiser.
 - J'ai imbriquer les scripts grace à **l'heritage** et j'ai connecter le clic sur la grille avec l'algo.
 
-- ***22-22*** : Les cellules qui sont en x = 0 ou y = 0 meurs. J'ai connecter 'history' avec le script tkinter. Ce qui fait que j'ai maintenant un **ctrl z** et **ctrl y** (undo/redo).
+- ***22-12*** : Les cellules qui sont en x = 0 ou y = 0 meurs. J'ai connecter 'history' avec le script tkinter. Ce qui fait que j'ai maintenant un **ctrl z** et **ctrl y** (undo/redo).
+
+- ***23-12*** : J'ai un peu réorganiser les fichier
 
 ### Problèmes
 #### Not fix

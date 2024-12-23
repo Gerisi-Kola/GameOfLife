@@ -1,8 +1,11 @@
+""" Ce fichier fait la liaison entre tout les scripts 
+et les incluent dans une interface Tkinter
+"""
 import tkinter as tk
 
-from matplot_Lib_GUI import GameOfLifePLT
-from music_gpt import Music
+from matplotlib_GUI import GameOfLifePLT
 from history import History
+from algo_game_of_life import AlgoGameOfLife
 
 
 class GameOfLifeTk(GameOfLifePLT):
@@ -12,21 +15,20 @@ class GameOfLifeTk(GameOfLifePLT):
         
         super().__init__(json_data)
         
+        self.game_of_life = AlgoGameOfLife(json_data)
+        
         self.tkinter_integration(self.root)
-        
-        
-        
         
         #    ------------    Button   ------------
         self.button_frame = tk.Frame(self.root)
         self.button_frame.pack(side='bottom')
         
         # Créer et placer les boutons
-        self.previous_button = tk.Button(self.button_frame, text="Previous", command=self.previous)
-        self.previous_button.pack(side="right")
-        
         self.redo_button = tk.Button(self.button_frame, text="Redo", command=self.redo)
         self.redo_button.pack(side="right")
+        
+        self.previous_button = tk.Button(self.button_frame, text="Previous", command=self.previous)
+        self.previous_button.pack(side="right")
         
         self.start_button = tk.Button(self.button_frame, text="Start", command=self.start)
         self.start_button.pack(side="left")
@@ -41,8 +43,6 @@ class GameOfLifeTk(GameOfLifePLT):
         self.history = History(json_data)
         self.previous_cell = None
         
-        self.music = Music(json_data)
-        self.music.launch_bg_music()
         
         self.root.mainloop()
     
@@ -51,46 +51,25 @@ class GameOfLifeTk(GameOfLifePLT):
     def clear(self):
         """Reinitialise la grille et le ndarray"""
         self.clear_grid()
-        self.clear_cell()
+        self.game_of_life.clear_cell()
     
     
     def start(self):
-        next = self.generation_manager()
+        next = self.game_of_life.generation_manager()
         self.update_grid_from_array(next)
         self.history.history_append(next)
-        """import numpy as np
-        n = np.zeros((10,10), int)
-        #n[2:5,2:5] = 10
-        #n[0,0] = 
-        n[::2,::2] += 10
-        #print(n)
-        import time
-        start1 = time.time()
-        #self.GLPLT.update_grid_from_array(n)
-        end1 = time.time()
-        time.sleep(0.5)
-        n +=10
-        n[::2,::2] = 0
-        start2 = time.time()
-        self.update_grid_from_array2(n)
-        end2 = time.time()
-        
-        print(start1-end1,"      ",start2-end2)"""
+    
     
     def previous (self):
-        #print()
-        #print("---- ---- history ---- ----")
-        #print(self.history.history)
         previous = self.history.time_travel()
         self.update_grid_from_array(previous)
-        self.cell_status = previous.copy()
-        #print(previous)
+        self.game_of_life.cell_status = previous.copy()
     
     
     def redo(self):
         next = self.history.redo_time_travel()
         self.update_grid_from_array(next)
-        self.cell_status = next.copy()
+        self.game_of_life.cell_status = next.copy()
 
 
 if __name__ == "__main__":

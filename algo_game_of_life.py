@@ -43,8 +43,6 @@ class AlgoGameOfLife():
     
     def scan_space(self):
         """Repere les celule vivante et les inscrits dans une liste"""
-        #self.cell_in_life = self.cell_in_life.reshape(0,0)
-        
         print(self.cell_in_life)
         print()
         x,y = np.where(self.cell_status == 10)
@@ -57,8 +55,6 @@ class AlgoGameOfLife():
     
     
     def on_clic_set_game_of_life_algo(self,i,j):
-        #print(i,j)
-        #j,i = i,j
         if self.cell_status[i,j]  == 0:
             self.cell_status[i,j] = 10
         else:

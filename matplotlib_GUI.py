@@ -2,11 +2,9 @@ import matplotlib.pyplot as plt
 #import matplotlib.animation as animation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
-from algo import AlgoGameOfLife
 
-class GameOfLifePLT(AlgoGameOfLife):
+class GameOfLifePLT:
     def __init__(self,json_data):
-        super().__init__(json_data)        
         # Créer la figure
         self.fig = plt.figure()
         self.ax = self.fig.add_axes([0.1, 0.1, 0.8, 0.8])
