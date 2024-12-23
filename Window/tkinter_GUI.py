@@ -4,6 +4,7 @@ from matplot_Lib_GUI import GameOfLifePLT
 from music_gpt import Music
 from history import History
 
+
 class GameOfLifeTk(GameOfLifePLT):
     def __init__(self,json_data):
         self.root = tk.Tk()
@@ -15,13 +16,17 @@ class GameOfLifeTk(GameOfLifePLT):
         
         
         
+        
         #    ------------    Button   ------------
         self.button_frame = tk.Frame(self.root)
         self.button_frame.pack(side='bottom')
         
         # Créer et placer les boutons
-        self.previous_button = tk.Button(self.button_frame, text="Previous", command=None)
+        self.previous_button = tk.Button(self.button_frame, text="Previous", command=self.previous)
         self.previous_button.pack(side="right")
+        
+        self.redo_button = tk.Button(self.button_frame, text="Redo", command=self.redo)
+        self.redo_button.pack(side="right")
         
         self.start_button = tk.Button(self.button_frame, text="Start", command=self.start)
         self.start_button.pack(side="left")
@@ -32,7 +37,9 @@ class GameOfLifeTk(GameOfLifePLT):
         self.clear_button = tk.Button(self.button_frame, text="Clear", command=self.clear)
         self.clear_button.pack(side="right")
         
+        
         self.history = History(json_data)
+        self.previous_cell = None
         
         self.music = Music(json_data)
         self.music.launch_bg_music()
@@ -69,7 +76,21 @@ class GameOfLifeTk(GameOfLifePLT):
         end2 = time.time()
         
         print(start1-end1,"      ",start2-end2)"""
-
+    
+    def previous (self):
+        #print()
+        #print("---- ---- history ---- ----")
+        #print(self.history.history)
+        previous = self.history.time_travel()
+        self.update_grid_from_array(previous)
+        self.cell_status = previous.copy()
+        #print(previous)
+    
+    
+    def redo(self):
+        next = self.history.redo_time_travel()
+        self.update_grid_from_array(next)
+        self.cell_status = next.copy()
 
 
 if __name__ == "__main__":
