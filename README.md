@@ -50,7 +50,9 @@
 
 - ***22-12*** : Les cellules qui sont en x = 0 ou y = 0 meurs. J'ai connecter 'history' avec le script tkinter. Ce qui fait que j'ai maintenant un **ctrl z** et **ctrl y** (undo/redo).
 
-- ***23-12*** : J'ai un peu réorganiser les fichier
+- ***23-12*** : J'ai un peu réorganiser les fichiers
+
+- ***24-12*** : J'ai réussi à faire une animation qui fonctionne.
 
 ### Problèmes
 #### Not fix

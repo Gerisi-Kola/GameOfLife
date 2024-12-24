@@ -15,8 +15,8 @@ class History:
     def history_append(self, status):
         if not np.array_equal(self.previous_status,status):
             #on evite les IndexError
-            if self.index == self.max_history_len:
-                self.index = 0
+            if self.index == self.max_history_len-1:
+                self.index = -1
             self.index += 1
             #on evite de bouclé dans l'historique
             if self.undo_len <= self.max_history_len:
@@ -24,13 +24,11 @@ class History:
             self.redo_len = 0
             
             self.history[self.index] = status
+            #print(self.index)
             
             #on vérifie à ne pas remplir l'historique avec le meme état
             self.previous_status = status.copy()
-        """else:
-            print(self.previous_status,"\n",status,"\n")"""
-        
-        #print(self.history)
+    
     
     def time_travel(self):
         if self.undo_len > 0 :
@@ -42,7 +40,6 @@ class History:
             
             self.index -= 1
             print(self.index)
-            #print(self.history)
             
             return self.history[self.index]
         else:
@@ -59,7 +56,6 @@ class History:
             
             self.index += 1
             print(self.index)
-            #print(self.history)
             
             return self.history[self.index]
         else:
@@ -70,22 +66,5 @@ if __name__ == "__main__":
     from json_controler import get_constant_and_limit
     json_data = get_constant_and_limit()
     h = History(json_data)
-    """for i in range(20):
-        h.history_append()
-    print(h.history)
-    print()
-    h.time_travel()
-    print()
-    h.c = 0
-    for i in range(4):
-        h.history_append()
-    print(h.history)
-    """
-    #print(h.history)
-    #h.history[0] = np.zeros((10,10), int) + 1
-    print(h.history)
     
-    """for i in range(20):
-        h.time_travel()
-        h.index += 1"""
-        #h.c += 1
+    print(h.history)

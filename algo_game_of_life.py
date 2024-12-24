@@ -17,9 +17,9 @@ né : 3 !!!
 import numpy as np
 
 class AlgoGameOfLife():
-    def __init__(self, json_data, print_text=True):
+    def __init__(self, json_data, print_text=False):
         
-        self.print_text = False #print_text
+        self.print_text = print_text
         
         self.grid_size = json_data["grid_size"]
         
@@ -27,31 +27,37 @@ class AlgoGameOfLife():
         if self.print_text:
             print(f"{self.cell_status}\n")
         
-        self.reload_life()
     
     
     def reload_life(self):
+        """ça charge un état prédéfini"""
         self.cell_in_life = np.array([[2,2],[3,3],[4,1],[4,2],[4,3]])
-            #self.old_stage = []
         for i in self.cell_in_life:
             self.cell_status[i[0],i[1]] = 10
         
         if self.print_text:
             print(f"{self.cell_status}\n")
+        
+        return self.cell_status
     
     
     
     def scan_space(self):
         """Repere les celule vivante et les inscrits dans une liste"""
-        print(self.cell_in_life)
-        print()
+        if self.print_text:
+            print(self.cell_in_life)
+            print()
+        
         x,y = np.where(self.cell_status == 10)
         
-        print(x,y)
-        print()
+        if self.print_text:
+            print(x,y)
+            print()
         
         self.cell_in_life = np.append(self.cell_in_life, np.column_stack((x, y)),axis=0)
-        print(self.cell_in_life)
+        
+        if self.print_text:
+            print(self.cell_in_life)
     
     
     def on_clic_set_game_of_life_algo(self,i,j):
@@ -59,6 +65,7 @@ class AlgoGameOfLife():
             self.cell_status[i,j] = 10
         else:
             self.cell_status[i,j] = 0
+        
         if self.print_text:
             print(self.cell_status)
     
@@ -68,28 +75,20 @@ class AlgoGameOfLife():
         if self.print_text:
             print(" ------ cell_status_calcul ---------")
             print(self.cell_status)
+        
         x,y = np.where(self.cell_status == 10)
         array_len = self.cell_status.shape
+        
         if self.print_text:
             print(array_len)
             print(np.column_stack((x, y)))
-        for i,j in np.column_stack((x, y)):
-            #print(i,j)
             
+        for i,j in np.column_stack((x, y)):
             if i != 0 and j != 0:
                 self.cell_status[i-1:i+2,j-1:j+2] += 1
                 self.cell_status[i,j] -= 1
             else:
-                print("error")
-            #self.cell_status[i,j] += 1
-            
-            #print(i-1,j-1)
-            #print(i,j)
-            #print(i+2,j+2)
-            #print()
-            
-        
-        #print(self.cell_status)
+                print("error ! x or y = 0")
     
     
     def clear_cell(self):
@@ -126,7 +125,8 @@ class AlgoGameOfLife():
         
             print(self.cell_status)
         return self.cell_status
-    
+
+
 if __name__ == "__main__":
     from json_controler import get_constant_and_limit
     json_data = get_constant_and_limit()

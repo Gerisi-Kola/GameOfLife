@@ -1,11 +1,13 @@
 import matplotlib.pyplot as plt
-#import matplotlib.animation as animation
+import matplotlib.animation as animation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
 class GameOfLifePLT:
-    def __init__(self,json_data):
+    def __init__(self,json_data, callback,update):
         # Créer la figure
+        self.update_callback = update
+        self.callback = callback
         self.fig = plt.figure()
         self.ax = self.fig.add_axes([0.1, 0.1, 0.8, 0.8])
         
@@ -38,7 +40,8 @@ class GameOfLifePLT:
             
             # Vérifier si le clic est dans la grille
             if 0 <= i < self.grid_size and 0 <= j < self.grid_size:
-                self.on_clic_set_game_of_life_algo(i,j)
+                self.callback(i,j)
+                #self.on_clic_set_game_of_life_algo(i,j)
                 self.on_clic_set_grid(i,j)
     
     
@@ -111,10 +114,24 @@ class GameOfLifePLT:
         
         # Rafraîchir l'affichage pour appliquer les changements
         self.fig.canvas.draw_idle()
-
+    
+    def animation_(self):
+        print("anim")
+        self.anim = animation.FuncAnimation( self.fig,
+                                        self.update_callback,
+                                        frames=100,
+                                        repeat=True
+                                        )
+        return self.anim
 
 if __name__ == "__main__":
     from json_controler import get_constant_and_limit
     json_data = get_constant_and_limit()
-    g = GameOfLifePLT(json_data)
+    from algo_game_of_life import AlgoGameOfLife
+    game_of_life = AlgoGameOfLife(json_data)
+    
+    def callback(i,j):
+        game_of_life.on_clic_set_game_of_life_algo(i,j)
+        print("callback")
+    g = GameOfLifePLT(json_data,callback,callback)
     plt.show()
