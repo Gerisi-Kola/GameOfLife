@@ -3,8 +3,8 @@
     "STASE_DOWN" : 12,
     "STASE_UP" : 13,
     
-    "grid_size" : 35,
-    "history_len" : 10,
+    "grid_size" : 50,
+    "history_len" : 128,
     
     "music" : {
         "touch_music" : {

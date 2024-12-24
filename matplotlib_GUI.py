@@ -117,12 +117,12 @@ class GameOfLifePLT:
     
     def animation_(self):
         print("anim")
-        self.anim = animation.FuncAnimation( self.fig,
+        anim = animation.FuncAnimation( self.fig,
                                         self.update_callback,
                                         frames=100,
                                         repeat=True
                                         )
-        return self.anim
+        return anim
 
 if __name__ == "__main__":
     from json_controler import get_constant_and_limit

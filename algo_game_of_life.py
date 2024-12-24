@@ -43,7 +43,7 @@ class AlgoGameOfLife():
     
     
     def scan_space(self):
-        """Repere les celule vivante et les inscrits dans une liste"""
+        """Repère les cellules vivantes et les inscrits dans une liste"""
         if self.print_text:
             print(self.cell_in_life)
             print()
@@ -98,7 +98,7 @@ class AlgoGameOfLife():
         if self.print_text:
             print(" ------ cell_status_calcul ---------")
             print(self.cell_status)
-        """Procéde aux naissances et aux morts"""
+        """Procède aux naissances et aux morts"""
         
         x,y = np.where(   (self.cell_status == 3)
                         | (self.cell_status == 12)
@@ -108,17 +108,11 @@ class AlgoGameOfLife():
         self.cell_status *= 0
         # on met à 10 toutes les cellules vivantes
         self.cell_status[x,y] = 10
-        
-        #print(" born_and_die \n",self.cell_status)
-        #print(x,y)
+    
     
     def generation_manager(self):
-        #self.scan_space()
-        #self.plus_plus()
-        #print(self.cell_in_life)
         self.cell_status_calcul() # calcul le voisinage
         self.born_and_die() # defini les celules vivantes et mortes
-        #self.check_rim() # verifie si il y a des celules qui s'approche du bore
         
         if self.print_text:
             print(" ------ new gen ---------")
@@ -131,9 +125,5 @@ if __name__ == "__main__":
     from json_controler import get_constant_and_limit
     json_data = get_constant_and_limit()
     g = AlgoGameOfLife(json_data)
-    #g.scan_space()
-    """g.cell_status_calcul()
-    g.born_and_die()"""
     for i in range(10):
         g.generation_manager()
-    #g.generation_manager(5)

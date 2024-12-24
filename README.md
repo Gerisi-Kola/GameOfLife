@@ -52,7 +52,7 @@
 
 - ***23-12*** : J'ai un peu réorganiser les fichiers
 
-- ***24-12*** : J'ai réussi à faire une animation qui fonctionne.
+- ***24-12*** : J'ai réussi à faire une animation qui fonctionne. L'animation peut être arrêter
 
 ### Problèmes
 #### Not fix
