@@ -52,7 +52,9 @@
 
 - ***23-12*** : J'ai un peu réorganiser les fichiers
 
-- ***24-12*** : J'ai réussi à faire une animation qui fonctionne. L'animation peut être arrêter
+- ***24-12*** : J'ai réussi à faire une animation qui fonctionne. L'animation peut être arrêter.
+
+- ***26-12*** : J'ai créé un fichier qui **charge** un état de cellules au milieu de la grille et qui **sauvegarde**.
 
 ### Problèmes
 #### Not fix
