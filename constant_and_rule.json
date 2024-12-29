@@ -1,11 +1,28 @@
 {
-    "NOT_BORN" : 2,
     "BORN" : 3,
-    "UNDER_POPULATE_DOWN" : 4,
-    "UNDER_POPULATE_UP" : 11,
     "STASE_DOWN" : 12,
     "STASE_UP" : 13,
-    "OVER_POPULATE" : 14
-
+    
+    "grid_size" : 50,
+    "history_len" : 128,
+    
+    "music" : {
+        "touch_music" : {
+            "source" : "iphone_son_de_touche.ogg",
+            "name" : "Son de Touche",
+            "credit" : "lasonotheque.org"
+            },
+        "bg_music" : {
+            "dreams" : {
+                "source" : "dreams.ogg",
+                "name" : "Dreams",
+                "credit" : "Melodigne"
+            },
+            "calm-my-mind" : {
+                "source" : "please-calm-my-mind.ogg",
+                "name" : "Please Calm My Mind",
+                "credit" : "Lesfm"
+            }
+        }
+    }
 }
-

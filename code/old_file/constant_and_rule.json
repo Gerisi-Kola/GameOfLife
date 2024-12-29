@@ -1,0 +1,11 @@
+{
+    "NOT_BORN" : 2,
+    "BORN" : 3,
+    "UNDER_POPULATE_DOWN" : 4,
+    "UNDER_POPULATE_UP" : 11,
+    "STASE_DOWN" : 12,
+    "STASE_UP" : 13,
+    "OVER_POPULATE" : 14
+
+}
+

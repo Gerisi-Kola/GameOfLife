@@ -1,6 +1,7 @@
 """
 L'interface est à l'envers, le point (0,0) est en bas à gauche alors que pour l'algo c'est en haut à gauche
 """
+import numpy as np
 import matplotlib.pyplot as plt
 import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -156,9 +157,10 @@ class WindowGameOfLife():
         """Modifie les cellules vivantes/mortes à chaque clic"""
         
         if [x,y] not in self.algo.cell_in_life:
-            self.algo.cell_in_life.append([x,y])
-        else:
-            self.algo.cell_in_life.remove([x,y])
+            print(f"x,y={x,y}")
+            self.algo.cell_in_life = np.append(self.algo.cell_in_life,np.column_stack((x, y)), axis=0)
+        #else:
+        #    self.algo.cell_in_life.remove([x,y])
         
         self.actual_stage = self.algo.cell_in_life.copy()
         #print(self.algo.cell_in_life)
