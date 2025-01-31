@@ -1,10 +1,10 @@
 """
 attention : 
-- un case entourer de celule vivante est égale à 8
+- un case entourer de cellule vivante est égale à 8
 - la valeur maximale est égale à 18
 
 Je pense partir sur une grille avec des valeur
-0 : vide / par defaut
+0 : vide / par défaut
 +10 : vivant
 +1 : pour chaque être vivant à coté
 
@@ -27,20 +27,39 @@ class AlgoGameOfLife():
         if self.print_text:
             print(f"{self.cell_status}\n")
         
+        self.cell_status[2::4,2:] = 10
+        self.cell_status[2:,2::7] = 10
+        
+        """import numpy as np   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
+        # Générer des indices aléatoires pour i et j
+        i_indices = np.random.randint(2, self.cell_status.shape[0] - 2, size=300)
+        j_indices = np.random.randint(2, self.cell_status.shape[1] - 2, size=300)
+        
+        # Mettre à jour la cellule avec la valeur 10
+        self.cell_status[i_indices, j_indices] = 10
+        """
     
     
     def reload_life(self):
         """ça charge un état prédéfini"""
-        self.cell_in_life = np.array([[2,2],[3,3],[4,1],[4,2],[4,3]])
+        """self.cell_in_life = np.array([[2,2],[3,3],[4,1],[4,2],[4,3]])
         for i in self.cell_in_life:
-            self.cell_status[i[0],i[1]] = 10
+            self.cell_status[i[0],i[1]] = 10"""
         
         if self.print_text:
             print(f"{self.cell_status}\n")
         
         return self.cell_status
     
-    
+    def random_fill(self):
+        # Générer des indices aléatoires pour i et j
+        i_indices = np.random.randint(2, self.cell_status.shape[0] - 2, size=300)
+        j_indices = np.random.randint(2, self.cell_status.shape[1] - 2, size=300)
+        
+        # Mettre à jour la cellule avec la valeur 10
+        self.cell_status[i_indices, j_indices] = 10
+        return self.cell_status
     
     def scan_space(self):
         """Repère les cellules vivantes et les inscrits dans une liste"""

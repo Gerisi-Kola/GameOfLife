@@ -38,6 +38,9 @@ class GameOfLifeTk(GameOfLifePLT):
         self.clear_button = tk.Button(self.button_frame, text="Clear", command=self.clear)
         self.clear_button.pack(side="right")
         
+        self.random_button = tk.Button(self.button_frame, text="Random", command=self.random_fill)
+        self.random_button.pack(side="right")
+        
         
         self.history = History(json_data)
         self.previous_cell = None
@@ -64,6 +67,11 @@ class GameOfLifeTk(GameOfLifePLT):
         self.update_grid_from_array(next)
         self.history.history_append(next)
     
+    
+    def random_fill(self):
+        life = self.game_of_life.random_fill()
+        self.update_grid_from_array(life)
+        
     
     
     def previous (self):

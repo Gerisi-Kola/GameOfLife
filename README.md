@@ -58,6 +58,8 @@
 
 - ***26-12*** : J'ai créé un fichier qui **charge** un état de cellules au milieu de la grille et qui **sauvegarde**.
 
+- ***29-12*** : J'ai merge la branch Devlop sur master. J'ai constater que la vitesse d'execution n’était pas dépendante du nombre de cellules vivantes ou mortes mais uniquement de la tailles de la grille
+- ***31-01*** : Création d'un bouton 'random' qui remplit certaines case au hasard. (Ca a été fait il y a un mois)
 
 ### Problèmes
 #### Not fix
