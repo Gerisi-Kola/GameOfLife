@@ -11,4 +11,4 @@ try:
 except:
     print("No music")
 
-g = GameOfLifeTk(json_data)
+game = GameOfLifeTk(json_data)

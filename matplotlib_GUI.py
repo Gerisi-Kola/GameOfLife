@@ -33,6 +33,7 @@ class GameOfLifePLT:
     
     
     def on_click(self, event):
+        """Reagit au clic de la grille"""
         if event.inaxes == self.ax:
             # Convertir les coordonnées du clic en indices de grille
             i = int(event.xdata)
@@ -46,6 +47,7 @@ class GameOfLifePLT:
     
     
     def on_clic_set_grid(self,i,j):
+        """Met a jour les info apres un clic de la grille"""
         square = self.squares[(i,j)]
         current_color = square.get_facecolor()
         new_color = 'black' if current_color[0] == 1 else 'white'

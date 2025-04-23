@@ -61,6 +61,7 @@ class GameOfLifeTk(GameOfLifePLT):
     
     
     def next_gen(self,*arg):
+        """Ca permet de passer à la generation suivantes"""
         print("start")
         next = self.game_of_life.generation_manager()
         self.clear_grid()
@@ -69,23 +70,26 @@ class GameOfLifeTk(GameOfLifePLT):
     
     
     def random_fill(self):
+        """Remplit la grilles avec certaines cellules aux hasard"""
         life = self.game_of_life.random_fill()
         self.update_grid_from_array(life)
         
     
     
     def previous (self):
+        """Ca permet de passer à la generation précédente"""
         previous = self.history.time_travel()
         self.update_grid_from_array(previous)
         self.game_of_life.cell_status = previous.copy()
     
     
-    def redo(self):
+    """def redo(self):
         next = self.history.redo_time_travel()
         self.update_grid_from_array(next)
-        self.game_of_life.cell_status = next.copy()
+        self.game_of_life.cell_status = next.copy()"""
     
     def on_clic_callback(self,i,j):
+        """Récupère l'info de clic venant de la class matplotlib et la renvoie vers la class algo"""
         self.game_of_life.on_clic_set_game_of_life_algo(i,j)
     
     def launch_animation(self):

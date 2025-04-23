@@ -61,6 +61,12 @@
 - ***29-12*** : J'ai merge la branch Devlop sur master. J'ai constater que la vitesse d'execution n’était pas dépendante du nombre de cellules vivantes ou mortes mais uniquement de la tailles de la grille
 - ***31-01*** : Création d'un bouton 'random' qui remplit certaines case au hasard. (Ca a été fait il y a un mois)
 
+------------------
+
+- ***23-04*** : Le fichier "master" a pris l’extension ".pyw" pour pouvoir le lancer instantanément. J'ai ajouter des commentaires.
+
+
+
 ### Problèmes
 #### Not fix
 1. La Méthode qui calcul les voisinages crash à du mal à gérer les cellules des bores, de tous les coté.

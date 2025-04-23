@@ -27,6 +27,7 @@ class AlgoGameOfLife():
         if self.print_text:
             print(f"{self.cell_status}\n")
         
+        # Cree des colone et ligne de cellule vivantes
         self.cell_status[2::4,2:] = 10
         self.cell_status[2:,2::7] = 10
         
@@ -144,5 +145,5 @@ if __name__ == "__main__":
     from json_controler import get_constant_and_limit
     json_data = get_constant_and_limit()
     g = AlgoGameOfLife(json_data)
-    for i in range(10):
+    for i in range(2):
         g.generation_manager()
