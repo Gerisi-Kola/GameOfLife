@@ -16,6 +16,12 @@ except:
 
 def clic_sound_caller():
     if music_is_found:
-        music.touch_sound()
+        music.touch_sound("grid")
+        #print("aaaaaaaaa")
 
-game = GameOfLifeTk(json_data,clic_sound_caller)
+def button_sound():
+    if music_is_found:
+        music.touch_sound("button")
+        #(print("ok")
+
+game = GameOfLifeTk(json_data,clic_sound_caller,button_sound)

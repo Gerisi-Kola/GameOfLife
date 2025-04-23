@@ -6,6 +6,7 @@ class Music:
         self.file = "music"
         self.json_bg = json_data["music"]["bg_music"]
         self.json_sound = json_data["music"]["touch_music"]
+        self.json_button = json_data["music"]["button_music"]
         #print(f"json_data = {self.json_bg}")
         self.bg_music = None
     
@@ -26,11 +27,15 @@ class Music:
         if self.bg_music:
             self.bg_music.stop()
     
-    def touch_sound(self):
+    def touch_sound(self, song):
         """ Joue un son de touche. """
         def play_touch_sound():
             pygame.mixer.init()
-            touch_sound = pygame.mixer.Sound(f"{self.file}/{self.json_sound["source"]}")
+            if song == "button":
+                touch_sound = pygame.mixer.Sound(f"{self.file}/{self.json_button["source"]}")
+            else:
+                print(f"song = {song}")
+                touch_sound = pygame.mixer.Sound(f"{self.file}/{self.json_sound["source"]}")
             touch_sound.play()
         
         # Lancer le son dans un thread séparé

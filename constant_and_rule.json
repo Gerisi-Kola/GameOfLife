@@ -12,6 +12,11 @@
             "name" : "Son de Touche",
             "credit" : "lasonotheque.org"
             },
+        "button_music" : {
+            "source" : "pistolet_armement.ogg",
+            "name" : "Son de Bouton",
+            "credit" : "lasonotheque.org"
+            },
         "bg_music" : {
             "dreams" : {
                 "source" : "dreams.ogg",
