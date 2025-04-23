@@ -9,7 +9,7 @@ from algo_game_of_life import AlgoGameOfLife
 
 
 class GameOfLifeTk(GameOfLifePLT):
-    def __init__(self,json_data):
+    def __init__(self,json_data,callback):
         self.root = tk.Tk()
         self.root.geometry("750x750")
         super().__init__(json_data,callback = self.on_clic_callback,update = self.next_gen)
@@ -49,6 +49,7 @@ class GameOfLifeTk(GameOfLifePLT):
         self.update_grid_from_array(life)
         
         self.first = True
+        self.callback_sounds = callback
         
         self.root.mainloop()
     
@@ -91,6 +92,10 @@ class GameOfLifeTk(GameOfLifePLT):
     def on_clic_callback(self,i,j):
         """Récupère l'info de clic venant de la class matplotlib et la renvoie vers la class algo"""
         self.game_of_life.on_clic_set_game_of_life_algo(i,j)
+        try: 
+            self.callback_sounds()
+        except:
+            print(" No Noise !!!!!!!")
     
     def launch_animation(self):
         """Cette fonction lance l'animation"""
@@ -110,4 +115,7 @@ class GameOfLifeTk(GameOfLifePLT):
 if __name__ == "__main__":
     from json_controler import get_constant_and_limit
     json_data = get_constant_and_limit()
-    g = GameOfLifeTk(json_data)
+    def noise():
+        """il n'y a pas de son a jouer !!"""
+        pass
+    g = GameOfLifeTk(json_data,noise)

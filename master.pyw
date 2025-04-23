@@ -5,10 +5,17 @@ from tkinter_GUI import GameOfLifeTk
 
 json_data = get_constant_and_limit()
 
+music_is_found = False
+
 try:
     music = Music(json_data)
     music.launch_bg_music()
+    music_is_found = True
 except:
     print("No music")
 
-game = GameOfLifeTk(json_data)
+def clic_sound_caller():
+    if music_is_found:
+        music.touch_sound()
+
+game = GameOfLifeTk(json_data,clic_sound_caller)
