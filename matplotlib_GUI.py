@@ -9,7 +9,9 @@ class GameOfLifePLT:
         self.update_callback = update
         self.callback = callback
         self.fig = plt.figure()
-        self.ax = self.fig.add_axes([0.1, 0.1, 0.8, 0.8])
+        # La taille de la grille
+        self.ax = self.fig.add_axes([0, 0, 1, 1])
+        self.ax.axis('off')  # cache les axes
         
         # Taille de la grille
         self.grid_size = json_data["grid_size"]
@@ -27,6 +29,7 @@ class GameOfLifePLT:
         self.ax.set_aspect('equal')
         self.ax.set_xlim(-0.1, self.grid_size + 0.1)
         self.ax.set_ylim(-0.1, self.grid_size + 0.1)
+        
         
         # Connecter l'événement de clic
         self.fig.canvas.mpl_connect('button_press_event', self.on_click)

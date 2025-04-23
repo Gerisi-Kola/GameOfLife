@@ -63,7 +63,7 @@
 
 ------------------
 
-- ***23-04*** : Le fichier "master" a pris l’extension ".pyw" pour pouvoir le lancer instantanément. J'ai ajouter des commentaires.
+- ***23-04*** : Le fichier "master" a pris l’extension ".pyw" pour pouvoir le lancer instantanément. J'ai ajouter des commentaires. La grille matplotlib prend **tout le canvas** et les axes ne sont plus là
 
 
 
