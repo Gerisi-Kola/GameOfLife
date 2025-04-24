@@ -7,6 +7,7 @@ from tkinter import ttk
 from matplotlib_GUI import GameOfLifePLT
 from history import History
 from algo_game_of_life import AlgoGameOfLife
+from menu_game_of_life import Menu_GameOfLife
 
 
 class GameOfLifeTk(GameOfLifePLT):
@@ -16,8 +17,13 @@ class GameOfLifeTk(GameOfLifePLT):
         
         self.root = tk.Tk()
         self.root.config(bg="White")
-        self.root.geometry("750x750")
+        self.root.geometry("800x850")
+        # self.root.iconbitmap("./music/Glider.ico")
+        self.root.title("Game of Life")
         super().__init__(json_data,callback = self.on_clic_callback,update = self.next_gen)
+        
+        self.menu_game_of_life = Menu_GameOfLife(self.root)
+        #self.barre_menu.pack()
         
         self.game_of_life = AlgoGameOfLife(json_data)
         
@@ -29,7 +35,7 @@ class GameOfLifeTk(GameOfLifePLT):
         
         # Apparence des boutons
         self.style = ttk.Style()
-        self.style.configure("TButton", padding=6)#relief="flat")
+        self.style.configure("TButton", padding=6, background="white")
         #self.style.theme_use("xpnative")
         """self.style.map("TButton", 
             focuscolor=[("focus", "")],
@@ -60,6 +66,7 @@ class GameOfLifeTk(GameOfLifePLT):
         
         self.first = True
         
+        self.root.protocol("WM_DELETE_WINDOW", self.close_sub_win)
         self.root.mainloop()
     
     
@@ -120,6 +127,12 @@ class GameOfLifeTk(GameOfLifePLT):
             self.start_button.config(text = "Start")
             self.anim.event_source.stop()
             self.first = True
+    
+    def close_sub_win(self):
+        if self.menu_game_of_life.win_rule:
+            self.menu_game_of_life.win_rule.destroy()
+        
+        self.root.destroy()
 
 
 if __name__ == "__main__":
