@@ -2,6 +2,7 @@
 et les incluent dans une interface Tkinter
 """
 import tkinter as tk
+from tkinter import ttk
 
 from matplotlib_GUI import GameOfLifePLT
 from history import History
@@ -12,7 +13,9 @@ class GameOfLifeTk(GameOfLifePLT):
     def __init__(self, json_data, callback_grid_sound, callback_button_sound):
         self.callback_grid_sound = callback_grid_sound
         self.callback_button_sound = callback_button_sound
+        
         self.root = tk.Tk()
+        self.root.config(bg="White")
         self.root.geometry("750x750")
         super().__init__(json_data,callback = self.on_clic_callback,update = self.next_gen)
         
@@ -21,25 +24,32 @@ class GameOfLifeTk(GameOfLifePLT):
         self.tkinter_integration(self.root)
         
         #    ------------    Button   ------------
-        self.button_frame = tk.Frame(self.root)
+        self.button_frame = tk.Frame(self.root,background="White")
         self.button_frame.pack(side='bottom')
         
+        # Apparence des boutons
+        self.style = ttk.Style()
+        self.style.configure("TButton", padding=6)#relief="flat")
+        #self.style.theme_use("xpnative")
+        """self.style.map("TButton", 
+            focuscolor=[("focus", "")],
+            highlightthickness=[("focus", "0")])"""
+        
         # Créer et placer les boutons
+        self.previous_button = ttk.Button(self.button_frame, text="Previous", takefocus=False, command=self.previous)
+        self.previous_button.pack(side="right", padx=10, pady=10, ipady=5)
         
-        self.previous_button = tk.Button(self.button_frame, text="Previous", command=self.previous)
-        self.previous_button.pack(side="right")
+        self.next_gen_button = ttk.Button(self.button_frame, text="Next", takefocus=False, command=lambda : self.next_gen(song=True))
+        self.next_gen_button.pack(side="left", padx=10, pady=10, ipady=5)
         
-        self.next_gen_button = tk.Button(self.button_frame, text="Next", command=lambda : self.next_gen(song=True))
-        self.next_gen_button.pack(side="left")
+        self.start_button = ttk.Button(self.button_frame, text="Start", takefocus=False, command=self.launch_animation)
+        self.start_button.pack(side="right", padx=10, pady=10, ipady=5)
         
-        self.start_button = tk.Button(self.button_frame, text="Start", command=self.launch_animation)
-        self.start_button.pack(side="right")
+        self.clear_button = ttk.Button(self.button_frame, text="Clear", takefocus=False, command=self.clear)
+        self.clear_button.pack(side="right", padx=10, pady=10, ipady=5)
         
-        self.clear_button = tk.Button(self.button_frame, text="Clear", command=self.clear)
-        self.clear_button.pack(side="right")
-        
-        self.random_button = tk.Button(self.button_frame, text="Random", command=self.random_fill)
-        self.random_button.pack(side="right")
+        self.random_button = ttk.Button(self.button_frame, text="Random", takefocus=False, command=self.random_fill)
+        self.random_button.pack(side="right", padx=10, pady=10, ipady=5)
         
         
         self.history = History(json_data)
