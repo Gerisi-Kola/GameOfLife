@@ -64,7 +64,7 @@
 ------------------
 
 - ***23-04*** : Le fichier "master" a pris l’extension ".pyw" pour pouvoir le lancer instantanément. J'ai ajouter des commentaires. La grille matplotlib prend **tout le canvas** et les axes ne sont plus là. J'ai mis la musique au clic.
-- ***24-04*** : Le desin des boutons est meilleur (utilisation de ttk)
+- ***24-04*** : Le desin des boutons est meilleur (utilisation de ttk). J'ai corriger le bug des mur sur l'algo !!!
 
 
 ### Problèmes

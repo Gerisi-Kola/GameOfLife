@@ -107,6 +107,15 @@ class AlgoGameOfLife():
             if i != 0 and j != 0:
                 self.cell_status[i-1:i+2,j-1:j+2] += 1
                 self.cell_status[i,j] -= 1
+            elif i == 0 and j != 0:
+                self.cell_status[i:i+2,j-1:j+2] += 1
+                self.cell_status[i,j] -= 1
+            elif i != 0 and j == 0:
+                self.cell_status[i-1:i+2,j:j+2] += 1
+                self.cell_status[i,j] -= 1
+            elif i == 0 and j == 0:
+                self.cell_status[i:i+2,j:j+2] += 1
+                self.cell_status[i,j] -= 1
             else:
                 print("error ! x or y = 0")
     
