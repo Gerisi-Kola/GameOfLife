@@ -66,7 +66,6 @@ class GameOfLifeTk(GameOfLifePLT):
         
         self.first = True
         
-        self.root.protocol("WM_DELETE_WINDOW", self.close_sub_win)
         self.root.mainloop()
     
     
@@ -127,12 +126,7 @@ class GameOfLifeTk(GameOfLifePLT):
             self.start_button.config(text = "Start")
             self.anim.event_source.stop()
             self.first = True
-    
-    def close_sub_win(self):
-        if self.menu_game_of_life.win_rule:
-            self.menu_game_of_life.win_rule.destroy()
-        
-        self.root.destroy()
+
 
 
 if __name__ == "__main__":

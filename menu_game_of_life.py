@@ -22,11 +22,10 @@ class Menu_GameOfLife:
     def rule_of_game(self):
         if not self.win_rule:
             self.win_rule = None
-            self.win_rule = tk.Tk()
+            self.win_rule = tk.Toplevel(self.root)
             self.win_rule.geometry("400x400")
             self.win_rule.title("Rule of Game")
             
-            self.win_rule.mainloop()
         else:
             self.win_rule.destroy()
             self.win_rule = False
