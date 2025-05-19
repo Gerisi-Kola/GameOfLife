@@ -45,22 +45,7 @@ class History:
         else:
             print("end of index")
             return self.history[self.index]
-    
-    def redo_time_travel(self):
-        if self.redo_len > 1:
-            self.undo_len += 1
-            self.redo_len -= 1
-            
-            if self.index == self.max_history_len:
-                self.index = 0
-            
-            self.index += 1
-            print(self.index)
-            
-            return self.history[self.index]
-        else:
-            print("end of redo index")
-            return self.history[self.index]
+
 
 if __name__ == "__main__":
     from json_controler import get_constant_and_limit

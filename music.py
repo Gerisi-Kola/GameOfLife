@@ -22,10 +22,11 @@ class Music:
         music_thread.daemon = True  # Le thread se ferme automatiquement quand le programme principal se termine
         music_thread.start()
     
-    def stop_bg_music(self):
-        """ Arrête la musique de fond. """
+    """def stop_bg_music(self):
+        "" Arrête la musique de fond. ""
         if self.bg_music:
             self.bg_music.stop()
+    """
     
     def touch_sound(self, song):
         """ Joue un son de touche. """

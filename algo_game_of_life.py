@@ -30,23 +30,10 @@ class AlgoGameOfLife():
         # Cree des colone et ligne de cellule vivantes
         self.cell_status[2::4,2:] = 10
         self.cell_status[2:,2::7] = 10
-        
-        """import numpy as np   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-        # Générer des indices aléatoires pour i et j
-        i_indices = np.random.randint(2, self.cell_status.shape[0] - 2, size=300)
-        j_indices = np.random.randint(2, self.cell_status.shape[1] - 2, size=300)
-        
-        # Mettre à jour la cellule avec la valeur 10
-        self.cell_status[i_indices, j_indices] = 10
-        """
     
     
     def reload_life(self):
         """ça charge un état prédéfini"""
-        """self.cell_in_life = np.array([[2,2],[3,3],[4,1],[4,2],[4,3]])
-        for i in self.cell_in_life:
-            self.cell_status[i[0],i[1]] = 10"""
         
         if self.print_text:
             print(f"{self.cell_status}\n")
@@ -61,23 +48,6 @@ class AlgoGameOfLife():
         # Mettre à jour la cellule avec la valeur 10
         self.cell_status[i_indices, j_indices] = 10
         return self.cell_status
-    
-    def scan_space(self):
-        """Repère les cellules vivantes et les inscrits dans une liste"""
-        if self.print_text:
-            print(self.cell_in_life)
-            print()
-        
-        x,y = np.where(self.cell_status == 10)
-        
-        if self.print_text:
-            print(x,y)
-            print()
-        
-        self.cell_in_life = np.append(self.cell_in_life, np.column_stack((x, y)),axis=0)
-        
-        if self.print_text:
-            print(self.cell_in_life)
     
     
     def on_clic_set_game_of_life_algo(self,i,j):
@@ -141,7 +111,7 @@ class AlgoGameOfLife():
     
     def generation_manager(self):
         self.cell_status_calcul() # calcul le voisinage
-        self.born_and_die() # defini les celules vivantes et mortes
+        self.born_and_die() # défini les cellules vivantes et mortes
         
         if self.print_text:
             print(" ------ new gen ---------")

@@ -16,7 +16,7 @@ class GameOfLifePLT:
         # Taille de la grille
         self.grid_size = json_data["grid_size"]
         
-        #Coulours
+        #Couleurs
         self.color_cell_edge = json_data["color_cell_edge"]
         self.color_cell_dead = json_data["color_cell_dead"]
         self.color_cell_life = json_data["color_cell_life"]
@@ -24,7 +24,7 @@ class GameOfLifePLT:
         self.grid_data = np.zeros((self.grid_size, self.grid_size))  # 0 pour blanc, 1 pour noir
         
         # Créer les carrés de la grille
-        self.squares = {}  # Changé en dictionnaire pour accès facile
+        self.squares = {}  # Cree un dictionnaire qui contient les cellules
         for i in range(self.grid_size):
             for j in range(self.grid_size):
                 square = plt.Rectangle((i, j), 1, 1, facecolor=self.color_cell_dead, edgecolor=self.color_cell_edge)
@@ -100,31 +100,6 @@ class GameOfLifePLT:
         # Rafraîchir l'affichage pour appliquer les changements
         self.fig.canvas.draw_idle()
     
-    
-    def update_grid_from_array2(self, array): # c'est la plus optimiser des 2
-        """
-        Met à jour la grille en fonction des valeurs dans un tableau numpy.
-        Les valeurs 0 deviennent blanches et les autres valeurs deviennent noires.
-        """
-        if array.shape != (self.grid_size, self.grid_size):
-            raise ValueError("Le tableau d'entrée doit avoir la même taille que la grille.")
-        
-        # Utiliser un tableau de couleurs (evite de recalculer la couleur de chaque carré individuellement)
-        color_map = {0: self.color_cell_dead, 10: 'black'}
-        
-        # Créer un tableau avec les couleurs à appliquer (en évitant de changer la couleur trop souvent)
-        for i in range(self.grid_size):
-            for j in range(self.grid_size):
-                color = color_map.get(array[i, j], 'black')  # Default to black if value is not 0 or 10
-                square = self.squares[(i, j)]
-                current_color = square.get_facecolor()[0]
-                
-                # Ne mettre à jour que si la couleur change pour éviter les appels redondants
-                if current_color != (1 if color == self.color_cell_dead else 0):
-                    square.set_facecolor(color)
-        
-        # Rafraîchir l'affichage pour appliquer les changements
-        self.fig.canvas.draw_idle()
     
     def animation_(self):
         print("anim")

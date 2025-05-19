@@ -36,10 +36,6 @@ class GameOfLifeTk(GameOfLifePLT):
         # Apparence des boutons
         self.style = ttk.Style()
         self.style.configure("TButton", padding=6, background="white")
-        #self.style.theme_use("xpnative")
-        """self.style.map("TButton", 
-            focuscolor=[("focus", "")],
-            highlightthickness=[("focus", "0")])"""
         
         # Créer et placer les boutons
         self.previous_button = ttk.Button(self.button_frame, text="Previous", takefocus=False, command=self.previous)
@@ -59,7 +55,6 @@ class GameOfLifeTk(GameOfLifePLT):
         
         
         self.history = History(json_data)
-        self.previous_cell = None
         
         life = self.game_of_life.reload_life()
         self.update_grid_from_array(life)
