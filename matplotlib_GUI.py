@@ -15,13 +15,19 @@ class GameOfLifePLT:
         
         # Taille de la grille
         self.grid_size = json_data["grid_size"]
+        
+        #Coulours
+        self.color_cell_edge = json_data["color_cell_edge"]
+        self.color_cell_dead = json_data["color_cell_dead"]
+        self.color_cell_life = json_data["color_cell_life"]
+        
         self.grid_data = np.zeros((self.grid_size, self.grid_size))  # 0 pour blanc, 1 pour noir
         
         # Créer les carrés de la grille
         self.squares = {}  # Changé en dictionnaire pour accès facile
         for i in range(self.grid_size):
             for j in range(self.grid_size):
-                square = plt.Rectangle((i, j), 1, 1, facecolor='white', edgecolor='black')
+                square = plt.Rectangle((i, j), 1, 1, facecolor=self.color_cell_dead, edgecolor=self.color_cell_edge)
                 self.ax.add_patch(square)
                 self.squares[(i,j)] = square
         
@@ -53,7 +59,7 @@ class GameOfLifePLT:
         """Met a jour les info apres un clic de la grille"""
         square = self.squares[(i,j)]
         current_color = square.get_facecolor()
-        new_color = 'black' if current_color[0] == 1 else 'white'
+        new_color = self.color_cell_life if current_color[0] == 1 else self.color_cell_dead
         square.set_facecolor(new_color)
         self.fig.canvas.draw_idle()  # Rafraîchir l'affichage
     
@@ -61,7 +67,7 @@ class GameOfLifePLT:
     def clear_grid(self):
         # Parcourir toutes les cases et les réinitialiser à la couleur blanche
         for square in self.squares.values():
-            square.set_facecolor('white')
+            square.set_facecolor(self.color_cell_dead)
         
         # Rafraîchir l'affichage pour appliquer les changements
         self.fig.canvas.draw_idle()
@@ -88,7 +94,7 @@ class GameOfLifePLT:
                 value = array[i, j]
                 square = self.squares[(i, j)]
                 # Si la valeur est 0, la case est blanche, sinon noire
-                color = 'white' if value == 0 else 'black'
+                color = self.color_cell_dead if value == 0 else self.color_cell_life
                 square.set_facecolor(color)
         
         # Rafraîchir l'affichage pour appliquer les changements
@@ -104,7 +110,7 @@ class GameOfLifePLT:
             raise ValueError("Le tableau d'entrée doit avoir la même taille que la grille.")
         
         # Utiliser un tableau de couleurs (evite de recalculer la couleur de chaque carré individuellement)
-        color_map = {0: 'white', 10: 'black'}
+        color_map = {0: self.color_cell_dead, 10: 'black'}
         
         # Créer un tableau avec les couleurs à appliquer (en évitant de changer la couleur trop souvent)
         for i in range(self.grid_size):
@@ -114,7 +120,7 @@ class GameOfLifePLT:
                 current_color = square.get_facecolor()[0]
                 
                 # Ne mettre à jour que si la couleur change pour éviter les appels redondants
-                if current_color != (1 if color == 'white' else 0):
+                if current_color != (1 if color == self.color_cell_dead else 0):
                     square.set_facecolor(color)
         
         # Rafraîchir l'affichage pour appliquer les changements

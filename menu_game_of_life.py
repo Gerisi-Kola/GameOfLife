@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from PIL import Image, ImageTk
 
 class Menu_GameOfLife:
     def __init__(self,root):
@@ -23,8 +24,18 @@ class Menu_GameOfLife:
         if not self.win_rule:
             self.win_rule = None
             self.win_rule = tk.Toplevel(self.root)
-            self.win_rule.geometry("400x400")
+            self.win_rule.geometry("800x800")
             self.win_rule.title("Rule of Game")
+            
+            self.image001 = Image.open("./music/Glider.png")
+            size_x,size_y = self.image001.size
+            size_x //= 2
+            size_y //= 2
+            self.image001 = self.image001.resize((size_x, size_y))
+            self.image001 = ImageTk.PhotoImage(self.image001)
+            
+            self.lab_image001 = tk.Label(self.win_rule, image=self.image001)
+            self.lab_image001.pack()
             
         else:
             self.win_rule.destroy()

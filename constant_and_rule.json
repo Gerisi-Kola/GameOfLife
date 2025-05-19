@@ -1,4 +1,12 @@
-{
+{   
+    "color_cell_life" : "black",
+    "color_cell_dead" : "white",
+    "color_cell_edge" : "grey",
+
+    "original_color_cell_life" : "white",
+    "original_color_cell_dead" : "black",
+    "original_color_cell_edge" : "grey",
+
     "BORN" : 3,
     "STASE_DOWN" : 12,
     "STASE_UP" : 13,
